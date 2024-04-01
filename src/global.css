@@ -1,0 +1,36 @@
+#header-column {
+    background-color: white !important;
+}
+
+.out-container {
+    background-color: #EAEAEA !important;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.sigCanvas{
+   border: 2px solid #0000005d;
+   border-radius: 15px;
+    width: 450px;
+    height: 200px;
+}
+.out-image{
+    width: 60%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.flex-reverse-important{
+    flex-direction: row-reverse !important;
+}
+@media screen and (max-width: 768px) {
+    .out-image{
+        width: 100vw
+    }
+    .sigCanvas{
+        width: 95vw;
+        height: 200px;
+    }
+}
