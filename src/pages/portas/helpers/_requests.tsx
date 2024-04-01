@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = `${import.meta.env.VITE_API_URL}/porta-request`;
+const baseUrl = `${import.meta.env.VITE_API_URL}/porta-request-out`;
 
 
 export async function getUser(id: any) {

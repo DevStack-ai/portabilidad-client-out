@@ -23,7 +23,7 @@ const Topbar: FC = () => {
         <div className="d-flex flex-column">
           <b className="text-muted">{moment(date).format("DD/MM/YYYY hh:mm:ss")}</b>
         </div>
-        <ThemeModeSwitcher toggleBtnClass="flex-center bg-body btn-color-gray-600 btn-active-color-primary h-40px" />
+        {/* <ThemeModeSwitcher toggleBtnClass="flex-center bg-body btn-color-gray-600 btn-active-color-primary h-40px" /> */}
       </div>
 
       <div className="d-flex align-items-center ms-3">

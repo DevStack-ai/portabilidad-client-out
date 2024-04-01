@@ -98,13 +98,22 @@ const AsideDefault = () => {
                   </span>
                 </div>
               </div>
-     
+
               <AsideMenuItem
-                to="/portas-out"
-                title="Solicitudes"
+                to="/portas-out/view"
+                title="Solicitudes Pendientes"
                 icon="save-2"
               />
-
+              <AsideMenuItem
+                to="/portas-out/due"
+                title="Solicitudes Vencidas"
+                icon="save-2"
+              />
+              <AsideMenuItem
+                to="/portas-out/closed"
+                title="Solicitudes Cerradas"
+                icon="save-2"
+              />
             </div>
           </div>
         </div>

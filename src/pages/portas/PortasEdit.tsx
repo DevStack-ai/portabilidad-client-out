@@ -4,8 +4,7 @@ import { ListLoading } from "../../_metronic/helpers/components/table/components
 
 import { useNavigate, useParams } from "react-router-dom";
 import { getUser } from "./helpers/_requests";
-import toast from "react-hot-toast";
-import { PortaRequest } from "../../definitions";
+import { PortaRequestOut } from "../../definitions";
 import moment from "moment";
 
 const DetailsDocumentWrapper = () => {
@@ -13,7 +12,7 @@ const DetailsDocumentWrapper = () => {
 
   const params = useParams();
   const [isLoading, setIslOading] = useState(true);
-  const [document, setDocument] = useState<PortaRequest | null>(null);
+  const [document, setDocument] = useState<PortaRequestOut | null>(null);
   const id = params.id;
 
 
@@ -42,12 +41,11 @@ const DetailsDocumentWrapper = () => {
 
       <div className="row mb-6 ms-0 px-0">
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          USUARIO
+          TELÉFONO
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.puser?.username}
+          {document.phone}
         </div>
-    
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
           FECHA DE SOLICITUD
         </label>
@@ -61,124 +59,96 @@ const DetailsDocumentWrapper = () => {
           {document.name}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          EMAIL
-        </label>
-        <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.email}
-        </div>
-        <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          TELÉFONO
-        </label>
-        <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.phone}
-        </div>
-        <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          TELÉFONO DE CONTACTO
-        </label>
-        <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.contact_phone}
-        </div>
-        <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          TIPO DE DOCUMENTO
-        </label>
-        <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.document_type === 1 ? "Cedula" :
-            document.document_type === 2 ? "Pasaporte" :
-              "RUC"}
-        </div>
-        <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
           DOCUMENTO
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.document_type === 1 ? `${document.c_provincia || document.c_letra}-${document.c_asiento}-${document.c_folio}` :
-            document.document_type === 2 ? document.passport :
-              document.ruc}
+          {document.document}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          DIRECCIÓN
+          RAZON
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.address}
+          {document.reason_id}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          PROVINCIA
+          CURR STATE
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.provincia}
+          {document.poa_curr_state}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          DISTRITO
+          DATE
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.distrito}
+          {document.poa_date}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          CORREGIMIENTO
+          LIB ACCT NO
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.corregimiento}
+          {document.poa_lib_acct_no}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          BARRIO
+          LIB OS BAL
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.barrio}
-        </div>
-     
-        <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-        </label>
-        <div className="col-lg-4 col-form-label fw-bold fs-6 ">
+          {document.poa_lib_os_bal}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          TIPO DE VIVIENDA
+          SERV TYPE
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.home_type === "1" ? "Casa" : "Apartamento"}
-        </div>
-      
-        <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          NÚMERO DE CASA
-        </label>
-        <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.home_number}
+          {document.poa_serv_type}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          NIP
+          SERVICE NO
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.nip}
+          {document.poa_service_no}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          ORIGEN
+          TRANSACTION ID
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.porigin?.name}
+          {document.poa_transaction_id}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          SIMCARD
+          GINA ID CASO
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.simcard}
+          {document.gina_id_caso}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          TELÉFONO PORTADO
+          ADD DATE
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.sgo_ported_phone}
+          {document.poa_add_date}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          RPA ESTATUS
+          CUST TYPE
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.rpa_status}
+          {document.poa_cust_type}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          RPA MENSAJE
+          TIMESTAMP
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.rpa_message}
+          {document.poa_timestamp}
         </div>
-      
+        <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
+          TOPOLOGIA ID
+        </label>
+        <div className="col-lg-4 col-form-label fw-bold fs-6 ">
+          {document.topologia_id}
+        </div>
+        <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
+          MESSAGE PXS
+        </label>
+        <div className="col-lg-4 col-form-label fw-bold fs-6 ">
+          {document.poa_message_pxs}
+        </div>
+
       </div>
 
       <div className="text-right w-100 pt-15 d-flex justify-content-end">
