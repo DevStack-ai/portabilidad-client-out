@@ -6,6 +6,7 @@ import portas from './reducers/portas/reducer'
 import portasout from './reducers/portasout/reducer'
 import portasoutdue from './reducers/portasoutdue/reducer'
 import portasoutclosed from './reducers/portasoutclosed/reducer'
+import topologias from './reducers/topologias/reducer'
 
 export const rootReducer = combineReducers({
   _permissions: _permisions,
@@ -14,7 +15,7 @@ export const rootReducer = combineReducers({
   portas: portas,
   portasout: portasout,
   portasoutdue: portasoutdue,
-  portasoutclosed: portasoutclosed
-
+  portasoutclosed: portasoutclosed,
+  topologias: topologias
 
 });

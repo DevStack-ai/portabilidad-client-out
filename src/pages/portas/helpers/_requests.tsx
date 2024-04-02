@@ -6,3 +6,10 @@ const baseUrl = `${import.meta.env.VITE_API_URL}/porta-request-out`;
 export async function getUser(id: any) {
   return axios.get(`${baseUrl}/details/${id}`);
 }
+export async function getTopologias(){
+  return axios.get(`${import.meta.env.VITE_API_URL}/topologias/select`);
+}
+
+export async function updateUser(id: any, data: any) {
+  return axios.put(`${baseUrl}/topologia/${id}`, data);
+}

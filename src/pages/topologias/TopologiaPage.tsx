@@ -1,11 +1,11 @@
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { PageTitle } from "../../_metronic/layout/core";
-import { UsersListWrapper } from "./UsersList";
-import { NewDocumentWrappeer } from "./UsersNew";
-import { EditDocumentWrappeer } from "./UsersEdit";
+import { ListWrapper } from "./TopologiaList";
+import { EditDocumentWrappeer } from "./TopologiaEdit";
+import { CreateDocumentWrapper } from "./TopologiaCreate"
 // import { UsersNewWrapper } from "./NewUser"
 
-const UsersPage = () => {
+const Wrapper = () => {
   return (
     <Routes>
       <Route element={<Outlet />}>
@@ -14,20 +14,9 @@ const UsersPage = () => {
           element={
             <>
               <PageTitle>
-                Usuarios
+                Topologias
               </PageTitle>
-              <UsersListWrapper />
-            </>
-          }
-        />
-        <Route
-          path="/create"
-          element={
-            <>
-              <PageTitle>
-                Usuarios / Agregar
-              </PageTitle>
-              <NewDocumentWrappeer />
+              <ListWrapper />
             </>
           }
         />
@@ -36,17 +25,30 @@ const UsersPage = () => {
           element={
             <>
               <PageTitle>
-                Usuarios / Editar
+                Topologias / Editar
               </PageTitle>
               <EditDocumentWrappeer />
             </>
           }
         />
+        <Route
+          path="/create"
+          element={
+            <>
+              <PageTitle>
+                Topologias / Nueva
+              </PageTitle>
+              <CreateDocumentWrapper />
+            </>
+          }
+        />
+
+
       </Route>
 
-      <Route index element={<Navigate to="/users/view" />} />
+      <Route index element={<Navigate to="/topologias/view" />} />
     </Routes>
   );
 };
 
-export default UsersPage;
+export default Wrapper;

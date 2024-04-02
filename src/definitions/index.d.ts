@@ -19,6 +19,10 @@ export interface NipRequest {
   // Omit relationship fields (user) as they're not directly part of the interface
 }
 
+export interface Topologia {
+  id: number;
+  description: string;
+}
 export interface PortaRequestOut {
   id: number;
   phone: string;
@@ -41,6 +45,8 @@ export interface PortaRequestOut {
   updated_by: string;
   reason_id: number;
   poa_message_pxs: string;
+
+  topologia?: Topologia;
 
   // Omit relationship fields (user, origin) as they're not directly part of the interface
 }

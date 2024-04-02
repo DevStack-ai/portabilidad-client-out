@@ -14,7 +14,7 @@ const PrivateRoutes = () => {
   // const UsersPage = lazy(() => import("../pages/users/UsersPage"));
   // const AdminsPage = lazy(() => import("../pages/admins/AdminsPage"));
   const PortasPage = lazy(() => import("../pages/portas/PortasPage"));
-
+  const TopologiaPage = lazy(() => import("../pages/topologias/TopologiaPage"));
   return (
     <Routes>
       <Route element={<MasterLayout />}>
@@ -31,15 +31,15 @@ const PrivateRoutes = () => {
               <UsersPage />
             </SuspensedView>
           }
-        />
+        />*/}
         <Route
-          path="/admins/*"
+          path="/topologias/*"
           element={
             <SuspensedView>
-              <AdminsPage />
+              <TopologiaPage />
             </SuspensedView>
           }
-        /> */}
+        /> 
         <Route
           path="/portas-out/*"
           element={

@@ -1,25 +1,36 @@
 import React, { useCallback, useEffect, useState } from "react";
+import Modal from 'react-bootstrap/Modal';
 
 import { ListLoading } from "../../_metronic/helpers/components/table/components/loading/ListLoading";
 
 import { useNavigate, useParams } from "react-router-dom";
-import { getUser } from "./helpers/_requests";
+import { getTopologias, getUser } from "./helpers/_requests";
+import { updateUser } from "../portas/helpers/_requests";
 import { PortaRequestOut } from "../../definitions";
 import moment from "moment";
+import toast from "react-hot-toast";
 
 const DetailsDocumentWrapper = () => {
   const navigate = useNavigate();
 
   const params = useParams();
+
+  const [topologia_id, setTopologia_id] = useState(0);
+  const [topologias, setTopologias] = useState([] as any);
+  const [showModal, setShowModal] = useState(false);
   const [isLoading, setIslOading] = useState(true);
   const [document, setDocument] = useState<PortaRequestOut | null>(null);
   const id = params.id;
 
 
 
+
+
   const fetchDocument = useCallback(async () => {
     setIslOading(true);
+    const topologiasQuery = await getTopologias()
     const query = await getUser(id);
+    setTopologias(topologiasQuery.data)
     setDocument(query.data);
     setIslOading(false);
   }, [id]);
@@ -28,7 +39,22 @@ const DetailsDocumentWrapper = () => {
     fetchDocument();
   }, []);
 
+  async function updateDocument() {
+    try{
 
+      setIslOading(true);
+      setShowModal(false)
+      await updateUser(id, { topologia_id });
+      fetchDocument();
+    }catch(err){
+      console.log(err)
+      toast.error("Error al cerrar caso")
+      setIslOading(false);
+      setShowModal(true)
+
+    }
+
+  }
   if (isLoading) {
     return <ListLoading />;
   }
@@ -38,6 +64,32 @@ const DetailsDocumentWrapper = () => {
   return (
 
     <div className="px-10 pt-lg-10">
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Cerrar Caso</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <label>
+            Seleccionar topologia
+          </label>
+          <select className="form-select form-select-solid" onChange={(ev) => setTopologia_id(Number(ev.target.value))}>
+            <option selected>- Seleccionar topologia -</option>
+            {topologias.map((topologia: any) => (
+              <option value={topologia.id}>{topologia.description}</option>
+            ))}
+          </select>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <button className="btn btn-secondary" onClick={() => setShowModal(false)}>
+            Cancelar
+          </button>
+          <button className="btn btn-primary" onClick={updateDocument} disabled={isLoading}>
+            Guardar
+          </button>
+        </Modal.Footer>
+      </Modal>
 
       <div className="row mb-6 ms-0 px-0">
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
@@ -137,10 +189,10 @@ const DetailsDocumentWrapper = () => {
           {document.poa_timestamp}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          TOPOLOGIA ID
+          TOPOLOGIA
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.topologia_id}
+          {document.topologia?.description}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
           MESSAGE PXS
@@ -160,8 +212,16 @@ const DetailsDocumentWrapper = () => {
         >
           Regresar
         </button>
+        {!document.topologia && <button
+          onClick={() => setShowModal(true)}
+          className="btn btn-primary me-3"
+          data-kt-users-modal-action="cancel"
+        >
+          Cerrar Caso
+        </button>}
 
       </div>
+
     </div>
 
   );

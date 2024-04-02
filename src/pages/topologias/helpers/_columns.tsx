@@ -8,27 +8,9 @@ const Columns: ReadonlyArray<Column<Object>> = [
     accessor: "id",
   },
   {
-    Header: "Telefono",
-    accessor: "phone",
-  },
-  {
-    Header: "Tipo de servicio",
-    accessor: "poa_serv_type",
-  },
-  {
-    Header: "Nombre",
-    accessor: "name",
-  },
-  {
-    Header: "Documento",
-    accessor: "document",
-  },
-  {
-    Header: "Fecha de solicitud",
-    accessor: "created_at",
-    Cell: ({ value }) => {
-      return moment(value).format("DD/MM/YYYY HH:mm A");
-    }
+    Header: "Descripcion",
+    accessor: "description",
+
   },
   {
     Header: "Acciones",
@@ -37,10 +19,10 @@ const Columns: ReadonlyArray<Column<Object>> = [
       return (
         <div className="px-2">
           <Link
-            to={`/portas-out/details/${row.original.id}`}
+            to={`/topologias/edit/${row.original.id}`}
             className="btn btn-secondary btn-sm me-2 mb-2 hover-elevate-down"
           >
-            Detalle
+            Editar
           </Link>
         </div>
       );

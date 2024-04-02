@@ -98,7 +98,11 @@ const AsideDefault = () => {
                   </span>
                 </div>
               </div>
-
+              <AsideMenuItem
+                to="/topologias"
+                title="Topologias"
+                icon="filter"
+              />
               <AsideMenuItem
                 to="/portas-out/view"
                 title="Solicitudes Pendientes"
