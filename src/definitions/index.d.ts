@@ -49,7 +49,7 @@ export interface PortaRequestOut {
   updated_by: string;
   reason_id: number;
   poa_message_pxs: string;
-
+  signed_file_url?: string;
   reason?: Reason;
   topologia?: Topologia;
 

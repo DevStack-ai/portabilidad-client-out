@@ -202,6 +202,17 @@ const DetailsDocumentWrapper = () => {
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
           {document.poa_message_pxs}
         </div>
+        {
+          document.signed_file_url && <>
+            <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
+               PDF FIRMADO
+            </label>
+            <a className="col-lg-4 col-form-label fw-bold fs-6 link" href={document.signed_file_url} download style={{ color: "#0066CB",  textDecoration: "underline"}}  target="_blank"> 
+              
+              Descargar archivo
+            </a>
+          </>
+        }
 
       </div>
 
@@ -224,7 +235,7 @@ const DetailsDocumentWrapper = () => {
 
       </div>
 
-    </div>
+    </div >
 
   );
 };
