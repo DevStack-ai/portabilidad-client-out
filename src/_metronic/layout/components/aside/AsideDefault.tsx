@@ -98,11 +98,11 @@ const AsideDefault = () => {
                   </span>
                 </div>
               </div>
-              <AsideMenuItem
+              {/* <AsideMenuItem
                 to="/topologias"
                 title="Tipologias"
                 icon="filter"
-              />
+              /> */}
               <AsideMenuItem
                 to="/portas-out/view"
                 title="Solicitudes Pendientes"
