@@ -50,8 +50,9 @@ const DetailsDocumentWrapper = () => {
       console.log(err)
       const message = err.response.data.message || "Error al cerrar caso"
       toast.error(message)
+      await updateUser(id, { topologia_id });
       setIslOading(false);
-      setShowModal(true)
+      setShowModal(false)
 
     }
 
