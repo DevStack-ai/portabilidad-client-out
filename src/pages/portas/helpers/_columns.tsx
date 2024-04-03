@@ -102,7 +102,7 @@ const ClosedColumns: ReadonlyArray<Column<Object>> = [
     accessor: "topologia",
 
     Cell: ({ row }) => {
-      return <>{row.original?.tipologia?.description}</>
+      return <>{row.original?.topologia?.description}</>
     }
   },
   {
