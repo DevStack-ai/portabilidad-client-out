@@ -192,11 +192,7 @@ const AsideDefault = () => {
               </div>
             </div>
             <div className="separator my-2"></div>
-            <div className="menu-item px-5 my-1">
-              <Link to="/profile" className="menu-link px-5">
-                Ajustes de Cuenta
-              </Link>
-            </div>
+     
 
             <div className="menu-item px-5">
               <Link to="/logout" className="menu-link px-5">
