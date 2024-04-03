@@ -39,7 +39,7 @@ const EditDocumentWrappeer = () => {
         description: values.description,
       };
       await updateUser(id, payload);
-      toast.success("Topologia editada",);
+      toast.success("Tipologia editada",);
       navigate("/topologias");
     } catch (err) {
       console.log(err)

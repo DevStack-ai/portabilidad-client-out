@@ -1,7 +1,7 @@
 import { BasicTable } from "../../_metronic/helpers/components/table/BasicTable";
 import { useBasicTable } from "../../_metronic/helpers/components/table/useBasicTable";
 import { useEffect } from "react";
-import { Columns } from "./helpers/_columns";
+import { ClosedColumns } from "./helpers/_columns";
 import { Search } from "../../_metronic/helpers/components/table/components/header/ListSearchComponent";
 import { useSelector } from "react-redux";
 import { BasicTableState, ReduxState } from "../../providers";
@@ -19,7 +19,7 @@ const ListWrapper = () => {
   return (
     <BasicTable
       {...helpers}
-      columnsList={Columns}
+      columnsList={ClosedColumns}
       dataList={dataList}
     >
       <Search

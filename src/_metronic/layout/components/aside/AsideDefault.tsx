@@ -100,7 +100,7 @@ const AsideDefault = () => {
               </div>
               <AsideMenuItem
                 to="/topologias"
-                title="Topologias"
+                title="Tipologias"
                 icon="filter"
               />
               <AsideMenuItem

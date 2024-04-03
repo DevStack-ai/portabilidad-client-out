@@ -71,10 +71,10 @@ const DetailsDocumentWrapper = () => {
         </Modal.Header>
         <Modal.Body>
           <label>
-            Seleccionar topologia
+            Seleccionar tipologia
           </label>
           <select className="form-select form-select-solid" onChange={(ev) => setTopologia_id(Number(ev.target.value))}>
-            <option selected>- Seleccionar topologia -</option>
+            <option selected>- Seleccionar tipologia -</option>
             {topologias.map((topologia: any) => (
               <option value={topologia.id}>{topologia.description}</option>
             ))}
@@ -120,7 +120,7 @@ const DetailsDocumentWrapper = () => {
           RAZON
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {document.reason_id}
+          {document.reason?.description}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
           CURR STATE
@@ -189,7 +189,7 @@ const DetailsDocumentWrapper = () => {
           {document.poa_timestamp}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          TOPOLOGIA
+          TIPOLOGIA
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
           {document.topologia?.description}

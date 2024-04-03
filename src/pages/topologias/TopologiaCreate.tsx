@@ -23,7 +23,7 @@ const CreateDocumentWrapper = () => {
                 description: values.description,
             };
             await createUser(payload);
-            toast.success("Topologia Creada",);
+            toast.success("Tipologia Creada",);
             navigate("/topologias");
             setIslOading(false)
 

@@ -23,6 +23,10 @@ export interface Topologia {
   id: number;
   description: string;
 }
+export interface Reason {
+  id: number;
+  description: string;
+}
 export interface PortaRequestOut {
   id: number;
   phone: string;
@@ -46,6 +50,7 @@ export interface PortaRequestOut {
   reason_id: number;
   poa_message_pxs: string;
 
+  reason?: Reason;
   topologia?: Topologia;
 
   // Omit relationship fields (user, origin) as they're not directly part of the interface

@@ -14,7 +14,7 @@ const Wrapper = () => {
           element={
             <>
               <PageTitle>
-                Topologias
+                Tipologias
               </PageTitle>
               <ListWrapper />
             </>
@@ -25,7 +25,7 @@ const Wrapper = () => {
           element={
             <>
               <PageTitle>
-                Topologias / Editar
+                Tipologias / Editar
               </PageTitle>
               <EditDocumentWrappeer />
             </>
@@ -36,7 +36,7 @@ const Wrapper = () => {
           element={
             <>
               <PageTitle>
-                Topologias / Nueva
+                Tipologias / Nueva
               </PageTitle>
               <CreateDocumentWrapper />
             </>
