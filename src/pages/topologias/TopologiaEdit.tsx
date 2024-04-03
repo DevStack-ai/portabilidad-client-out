@@ -32,9 +32,6 @@ const EditDocumentWrappeer = () => {
 
   async function onSubmit(values: any) {
     try {
-
-
-
       const payload = {
         description: values.description,
       };
@@ -48,6 +45,7 @@ const EditDocumentWrappeer = () => {
   if (isLoading) {
     return <ListLoading />;
   }
+  
   return (
     <Formik
       validationSchema={DocumentSchemaCreate}
