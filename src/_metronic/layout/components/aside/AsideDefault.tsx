@@ -118,6 +118,11 @@ const AsideDefault = () => {
                 title="Solicitudes Cerradas"
                 icon="save-2"
               />
+               <AsideMenuItem
+                to="/portas-out/assigned"
+                title="Mis asignaciones"
+                icon="save-2"
+              />
             </div>
           </div>
         </div>

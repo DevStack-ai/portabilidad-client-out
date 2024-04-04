@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { ListLoading } from "../../_metronic/helpers/components/table/components/loading/ListLoading";
 
 import { useNavigate, useParams } from "react-router-dom";
-import { getTopologias, getUser } from "./helpers/_requests";
+import { getTopologias, getUser, takeCase } from "./helpers/_requests";
 import { updateUser } from "../portas/helpers/_requests";
 import { PortaRequestOut } from "../../definitions";
 import moment from "moment";
@@ -23,7 +23,7 @@ const DetailsDocumentWrapper = () => {
   const [document, setDocument] = useState<PortaRequestOut | null>(null);
   const id = params.id;
 
-  const {currentUser} = useAuth()
+  const { currentUser } = useAuth()
 
 
 
@@ -39,7 +39,20 @@ const DetailsDocumentWrapper = () => {
   useEffect(() => {
     fetchDocument();
   }, []);
+  async function take(porta_id: number) {
+    try {
+      await takeCase(porta_id)
+      toast.success("Asignado exitosamente")
+      fetchDocument();
 
+    } catch (err: any) {
+      console.log(err)
+      const message = err.response.data.message || "Error al tomar caso"
+      toast.error(message)
+      fetchDocument();
+
+    }
+  }
   async function updateDocument() {
     try {
 
@@ -204,10 +217,10 @@ const DetailsDocumentWrapper = () => {
         {
           document.signed_file_url && <>
             <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-               PDF FIRMADO
+              PDF FIRMADO
             </label>
-            <a className="col-lg-4 col-form-label fw-bold fs-6 link" href={document.signed_file_url} download style={{ color: "#0066CB",  textDecoration: "underline"}}  target="_blank"> 
-              
+            <a className="col-lg-4 col-form-label fw-bold fs-6 link" href={document.signed_file_url} download style={{ color: "#0066CB", textDecoration: "underline" }} target="_blank">
+
               Descargar archivo
             </a>
           </>
@@ -224,7 +237,14 @@ const DetailsDocumentWrapper = () => {
         >
           Regresar
         </button>
-        {!document.topologia && document.agent?.id === currentUser?.id && <button
+        {!document.agent?.id && <button
+          onClick={() => take(document.id)}
+          className="btn btn-primary me-3"
+          data-kt-users-modal-action="cancel"
+        >
+          Tomar Caso
+        </button>}
+        {(!document.topologia && document.agent?.id === currentUser?.id )&& <button
           onClick={() => setShowModal(true)}
           className="btn btn-primary me-3"
           data-kt-users-modal-action="cancel"

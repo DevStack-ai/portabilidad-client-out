@@ -2,22 +2,21 @@ import React, { useState, useCallback } from "react";
 import { BasicTable } from "../../_metronic/helpers/components/table/BasicTable";
 import { useBasicTable } from "../../_metronic/helpers/components/table/useBasicTable";
 import { useEffect } from "react";
-import { getColumns } from "./helpers/_columns";
+import { getAssigned } from "./helpers/_columns";
 import { getTopologias } from "./helpers/_requests";
 import { Search } from "../../_metronic/helpers/components/table/components/header/ListSearchComponent";
 import { useSelector } from "react-redux";
-import { BasicTableState, ReduxState, useAuth } from "../../providers";
+import { BasicTableState, ReduxState } from "../../providers";
 import * as actions from "../../redux/reducers/portasoutdue/actions";
 import TopologiaModal from "../../components/modal/TopologiaModal";
-import { updateUser, takeCase} from "../portas/helpers/_requests";
+import { updateUser } from "../portas/helpers/_requests";
 import toast from "react-hot-toast";
 import { PortaRequestOut } from "../../definitions";
 
 const ListWrapper = () => {
-  const portasoutdue: BasicTableState = useSelector((state: ReduxState) => state.portasoutdue);
-  const { dataList, helpers } = useBasicTable("/porta-request-out/due", portasoutdue, actions);
+  const assigned: BasicTableState = useSelector((state: ReduxState) => state.assigned);
+  const { dataList, helpers } = useBasicTable("/porta-request-out/assign", assigned, actions);
 
-  const { currentUser } = useAuth()
   const [modalShow, setModalShow] = useState(false);
   const [topologias, setTopologias] = useState([])
   const [document, setDocument] = useState<null | PortaRequestOut>(null);
@@ -55,28 +54,16 @@ const ListWrapper = () => {
   function closeCae(document: PortaRequestOut) {
     setDocument(document)
     setModalShow(true)
-  
-  }
-  async function take(porta_id: number) {
-    try {
-      await takeCase(porta_id)
-      toast.success("Asignado exitosamente")
-      helpers.fetchData();
 
-    } catch (err: any) {
-      console.log(err)
-      const message = err.response.data.message || "Error al tomar caso"
-      toast.error(message)
-      helpers.fetchData();
-
-    }
   }
+
   useEffect(() => {
-    if (portasoutdue.isFirstTime) {
+    if (assigned.isFirstTime) {
       helpers.fetchData();
     }
   }, []);
   return (
+
     <>
       {document?.id && <TopologiaModal
         show={modalShow}
@@ -85,9 +72,10 @@ const ListWrapper = () => {
         isLoading={helpers.isLoading}
         onSave={updateDocument}
       />}
+      asd
       <BasicTable
         {...helpers}
-        columnsList={getColumns({ setDocument: closeCae, takeCase: take, currentUser })}
+        columnsList={getAssigned({ setDocument: closeCae })}
         dataList={dataList}
       >
         <Search

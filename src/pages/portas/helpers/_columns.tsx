@@ -59,7 +59,6 @@ function getColumns({ setDocument, takeCase, currentUser }) {
       Header: "Acciones",
       id: "actions",
       Cell: ({ row }) => {
-        console.log(row.original.agent?.id, currentUser.id )
         return (
           <div className="px-2">
             <Dropdown as={ButtonGroup}>
@@ -78,6 +77,84 @@ function getColumns({ setDocument, takeCase, currentUser }) {
               <Dropdown.Menu>
                 {!row.original.agent?.id && <Dropdown.Item onClick={() => takeCase(row.original.id)}>Tomar caso</Dropdown.Item>}
                 {row.original.agent?.id === currentUser.id && <Dropdown.Item onClick={() => setDocument(row.original)}>Cerrar caso</Dropdown.Item>}
+              </Dropdown.Menu>
+            </Dropdown>
+
+          </div>
+        );
+      },
+    },
+  ];
+  return Columns;
+}
+function getAssigned({ setDocument }) {
+  const Columns: ReadonlyArray<Column<Object>> = [
+    {
+      Header: "ID",
+      accessor: "id",
+    },
+    {
+      Header: "Telefono",
+      accessor: "phone",
+    },
+    {
+      Header: "ID de transacción",
+      accessor: "poa_transaction_id"
+    },
+    {
+      Header: "Tipo de servicio",
+      accessor: "poa_serv_type",
+      Cell: ({ row }) => {
+        return <>{row.original?.poa_serv_type === "prepaid" ? "Prepago" : "Postpago"}</>
+      }
+    },
+    {
+      Header: "Nombre",
+      accessor: "name",
+    },
+    {
+      Header: "Documento",
+      accessor: "document",
+      Cell: ({ row }) => {
+        return <>{row.original?.document}</>
+      }
+    },
+    {
+      Header: "RAZÓN",
+      accessor: "reason",
+
+      Cell: ({ row }) => {
+        return <>{row.original?.reason?.description}</>
+      }
+    },
+
+    {
+      Header: "Fecha de solicitud",
+      accessor: "created_at",
+      Cell: ({ value }) => {
+        return moment(value).format("DD/MM/YYYY HH:mm A");
+      }
+    },
+    {
+      Header: "Acciones",
+      id: "actions",
+      Cell: ({ row }) => {
+        return (
+          <div className="px-2">
+            <Dropdown as={ButtonGroup}>
+
+              <Button variant="secondary">
+                <Link
+                  to={`/portas-out/details/${row.original.id}`}
+                  style={{ color: "black" }}
+                >
+                  Detalle
+                </Link>
+              </Button>
+              <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic" />
+
+              <Dropdown.Menu>
+                {!row.original.topologia && <Dropdown.Item onClick={() => setDocument(row.original)}>Cerrar caso</Dropdown.Item>}
               </Dropdown.Menu>
             </Dropdown>
 
@@ -128,6 +205,14 @@ const ClosedColumns: ReadonlyArray<Column<Object>> = [
     }
   },
   {
+    Header: "Agente",
+    accessor: "agent",
+
+    Cell: ({ row }) => {
+      return <>{row.original?.agent?.username}</>
+    }
+  },
+  {
     Header: "Tipologia",
     accessor: "topologia",
 
@@ -159,4 +244,4 @@ const ClosedColumns: ReadonlyArray<Column<Object>> = [
     },
   },
 ];
-export { getColumns, ClosedColumns };
+export { getColumns, ClosedColumns, getAssigned };

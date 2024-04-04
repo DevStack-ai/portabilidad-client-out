@@ -4,7 +4,7 @@ import { ListWrapper } from "./PortasList";
 import { ListWrapper as ListWrapperDue } from "./PortasListDue";
 import { ListWrapper as ListWrapperClosed } from "./PortasListClosed";
 import { DetailsDocumentWrapper } from "./PortasEdit";
-
+import { ListWrapper as MyAssigned } from "./PortasListAssigned";
 // import { UsersNewWrapper } from "./NewUser"
 
 const Wrapper = () => {
@@ -53,6 +53,17 @@ const Wrapper = () => {
                 Solicitudes / Detalle
               </PageTitle>
               <DetailsDocumentWrapper />
+            </>
+          }
+        />
+          <Route
+          path="/assigned/"
+          element={
+            <>
+              <PageTitle>
+                Mis Asignaciones
+              </PageTitle>
+              <MyAssigned />
             </>
           }
         />
