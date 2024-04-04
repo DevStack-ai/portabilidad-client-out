@@ -72,7 +72,7 @@ const ListWrapper = () => {
         isLoading={helpers.isLoading}
         onSave={updateDocument}
       />}
-      asd
+      
       <BasicTable
         {...helpers}
         columnsList={getAssigned({ setDocument: closeCae })}
