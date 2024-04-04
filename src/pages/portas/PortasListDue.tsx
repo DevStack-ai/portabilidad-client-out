@@ -46,6 +46,7 @@ const ListWrapper = () => {
       toast.error(message)
       setDocument(null)
       setModalShow(false)
+      helpers.fetchData();
 
     }
 
@@ -61,11 +62,14 @@ const ListWrapper = () => {
       console.log(porta_id)
       await takeCase(porta_id)
       toast.success("Asignado exitosamente")
+      helpers.fetchData();
 
     } catch (err: any) {
       console.log(err)
       const message = err.response.data.message || "Error al tomar caso"
       toast.error(message)
+      helpers.fetchData();
+
     }
   }
   useEffect(() => {
