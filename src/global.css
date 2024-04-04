@@ -25,6 +25,18 @@
 .flex-reverse-important{
     flex-direction: row-reverse !important;
 }
+
+#custom-dropdown{
+    z-index: 999;
+    background-color: #fff;
+    position: absolute;
+    top: 50px;
+    left: 445px;
+    padding: 0px 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+
+}
 @media screen and (max-width: 768px) {
     .out-image{
         width: 100vw

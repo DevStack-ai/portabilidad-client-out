@@ -2,66 +2,90 @@
 import { Column } from "react-table";
 import moment from "moment";
 import { Link } from "react-router-dom";
-const Columns: ReadonlyArray<Column<Object>> = [
-  {
-    Header: "ID",
-    accessor: "id",
-  },
-  {
-    Header: "Telefono",
-    accessor: "phone",
-  },
-  {
-    Header: "Tipo de servicio",
-    accessor: "poa_serv_type",
-    Cell: ({ row }) => {
-      return <>{row.original?.poa_serv_type === "prepaid" ? "Prepago" : "Postpago"}</>
-    }
-  },
-  {
-    Header: "Nombre",
-    accessor: "name",
-  },
-  {
-    Header: "Documento",
-    accessor: "document",
-    Cell: ({ row }) => {
-      return <>{row.original?.document}</>
-    }
-  },
-  {
-    Header: "RAZÓN",
-    accessor: "reason",
 
-    Cell: ({ row }) => {
-      return <>{row.original?.reason?.description}</>
-    }
-  },
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
 
-  {
-    Header: "Fecha de solicitud",
-    accessor: "created_at",
-    Cell: ({ value }) => {
-      return moment(value).format("DD/MM/YYYY HH:mm A");
-    }
-  },
-  {
-    Header: "Acciones",
-    id: "actions",
-    Cell: ({ row }) => {
-      return (
-        <div className="px-2">
-          <Link
-            to={`/portas-out/details/${row.original.id}`}
-            className="btn btn-secondary btn-sm me-2 mb-2 hover-elevate-down"
-          >
-            Detalle
-          </Link>
-        </div>
-      );
+function getColumns({ setDocument }) {
+  const Columns: ReadonlyArray<Column<Object>> = [
+    {
+      Header: "ID",
+      accessor: "id",
     },
-  },
-];
+    {
+      Header: "Telefono",
+      accessor: "phone",
+    },
+    {
+      Header: "ID de transacción",
+      accessor: "poa_transaction_id"
+    },
+    {
+      Header: "Tipo de servicio",
+      accessor: "poa_serv_type",
+      Cell: ({ row }) => {
+        return <>{row.original?.poa_serv_type === "prepaid" ? "Prepago" : "Postpago"}</>
+      }
+    },
+    {
+      Header: "Nombre",
+      accessor: "name",
+    },
+    {
+      Header: "Documento",
+      accessor: "document",
+      Cell: ({ row }) => {
+        return <>{row.original?.document}</>
+      }
+    },
+    {
+      Header: "RAZÓN",
+      accessor: "reason",
+
+      Cell: ({ row }) => {
+        return <>{row.original?.reason?.description}</>
+      }
+    },
+
+    {
+      Header: "Fecha de solicitud",
+      accessor: "created_at",
+      Cell: ({ value }) => {
+        return moment(value).format("DD/MM/YYYY HH:mm A");
+      }
+    },
+    {
+      Header: "Acciones",
+      id: "actions",
+      Cell: ({ row }) => {
+        return (
+          <div className="px-2">
+            <Dropdown as={ButtonGroup}>
+
+              <Button variant="secondary">
+                <Link
+                  to={`/portas-out/details/${row.original.id}`}
+                  style={{ color: "black" }}
+                >
+                  Detalle
+                </Link>
+              </Button>
+              <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic" />
+
+              <Dropdown.Menu>
+                {/* <Dropdown.Item href="#/action-1">Tomar caso</Dropdown.Item> */}
+                <Dropdown.Item onClick={() => setDocument(row.original)}>Cerrar caso</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+
+          </div>
+        );
+      },
+    },
+  ];
+  return Columns;
+}
 const ClosedColumns: ReadonlyArray<Column<Object>> = [
   {
     Header: "ID",
@@ -70,6 +94,10 @@ const ClosedColumns: ReadonlyArray<Column<Object>> = [
   {
     Header: "Telefono",
     accessor: "phone",
+  },
+  {
+    Header: "ID de transacción",
+    accessor: "poa_transaction_id"
   },
   {
     Header: "Tipo de servicio",
@@ -129,4 +157,4 @@ const ClosedColumns: ReadonlyArray<Column<Object>> = [
     },
   },
 ];
-export { Columns, ClosedColumns };
+export { getColumns, ClosedColumns };

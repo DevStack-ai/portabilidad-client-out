@@ -49,7 +49,7 @@ function BasicTable(props: BasicTableProps) {
       <div className="px-10 pt-2">
         <div
           className=""
-          style={{ maxHeight: "70vh", maxWidth: "100%", overflowX: "auto" }}
+          style={{ maxHeight: "70vh", minHeight:"20vh", maxWidth: "100%", overflowX: "auto" }}
         >
           <table
             id="kt_table_users"
@@ -95,7 +95,7 @@ function BasicTable(props: BasicTableProps) {
                       <tr
                         {...row.getRowProps({
                           className:
-                            "border-bottom border-top border-ddark actions-custom-container",
+                            "border-bottom border-top border-dark ",
                         })}
                         key={i}
                       >

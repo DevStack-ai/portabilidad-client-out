@@ -1,15 +1,60 @@
+import React, { useState, useCallback } from "react";
 import { BasicTable } from "../../_metronic/helpers/components/table/BasicTable";
 import { useBasicTable } from "../../_metronic/helpers/components/table/useBasicTable";
 import { useEffect } from "react";
-import { Columns } from "./helpers/_columns";
+import { getColumns } from "./helpers/_columns";
+import { getTopologias } from "./helpers/_requests";
 import { Search } from "../../_metronic/helpers/components/table/components/header/ListSearchComponent";
 import { useSelector } from "react-redux";
 import { BasicTableState, ReduxState } from "../../providers";
 import * as actions from "../../redux/reducers/portasout/actions";
+import TopologiaModal from "../../components/modal/TopologiaModal";
+import { updateUser } from "../portas/helpers/_requests";
+import toast from "react-hot-toast";
+import { PortaRequestOut } from "../../definitions";
 
 const ListWrapper = () => {
   const portasout: BasicTableState = useSelector((state: ReduxState) => state.portasout);
   const { dataList, helpers } = useBasicTable("/porta-request-out", portasout, actions);
+
+  const [modalShow, setModalShow] = useState(false);
+  const [topologias, setTopologias] = useState([])
+  const [document, setDocument] = useState<null | PortaRequestOut>(null);
+
+  const fetchDocument = useCallback(async () => {
+    const topologiasQuery = await getTopologias()
+    setTopologias(topologiasQuery.data)
+  }, []);
+
+  useEffect(() => {
+    fetchDocument();
+  }, []);
+
+  async function updateDocument(value: number) {
+    try {
+      if (!document) return
+
+      setModalShow(false)
+      await updateUser(document.id, { topologia_id: value });
+      helpers.fetchData();
+      setDocument(null)
+
+    } catch (err: any) {
+      console.log(err)
+      const message = err.response.data.message || "Error al cerrar caso"
+      toast.error(message)
+      setDocument(null)
+      setModalShow(false)
+
+    }
+
+  }
+
+  function closeCae(document: PortaRequestOut) {
+    setDocument(document)
+    setModalShow(true)
+
+  }
 
   useEffect(() => {
     if (portasout.isFirstTime) {
@@ -17,20 +62,30 @@ const ListWrapper = () => {
     }
   }, []);
   return (
-    <BasicTable
-      {...helpers}
-      columnsList={Columns}
-      dataList={dataList}
-    >
-      <Search
-        placeholder="Buscar por teléfono"
-        onChange={(term: string) => {
-          helpers.setFilters({
-            "phone": term,
-          });
-        }}
-      />
-    </BasicTable>
+    <>
+      {document?.id && <TopologiaModal
+        show={modalShow}
+        topologias={topologias}
+        document={document}
+        isLoading={helpers.isLoading}
+        onSave={updateDocument}
+      />}
+
+      <BasicTable
+        {...helpers}
+        columnsList={getColumns({ setDocument: closeCae })}
+        dataList={dataList}
+      >
+        <Search
+          placeholder="Buscar por teléfono"
+          onChange={(term: string) => {
+            helpers.setFilters({
+              "phone": term,
+            });
+          }}
+        />
+      </BasicTable>
+    </>
   );
 };
 

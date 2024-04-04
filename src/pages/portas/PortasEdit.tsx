@@ -47,10 +47,8 @@ const DetailsDocumentWrapper = () => {
       await updateUser(id, { topologia_id });
       fetchDocument();
     } catch (err: any) {
-      console.log(err)
       const message = err.response.data.message || "Error al cerrar caso"
       toast.error(message)
-      await updateUser(id, { topologia_id });
       setIslOading(false);
       setShowModal(false)
 
