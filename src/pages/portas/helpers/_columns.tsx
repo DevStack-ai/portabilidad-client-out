@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-function getColumns({ setDocument }) {
+function getColumns({ setDocument, takeCase, currentUser }) {
   const Columns: ReadonlyArray<Column<Object>> = [
     {
       Header: "ID",
@@ -59,6 +59,7 @@ function getColumns({ setDocument }) {
       Header: "Acciones",
       id: "actions",
       Cell: ({ row }) => {
+        console.log(row.original.agent?.id, currentUser.id )
         return (
           <div className="px-2">
             <Dropdown as={ButtonGroup}>
@@ -71,11 +72,12 @@ function getColumns({ setDocument }) {
                   Detalle
                 </Link>
               </Button>
-              <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic" />
+              {(row.original.agent?.id === currentUser?.id || !row.original.agent?.id)
+                && <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic" />}
 
               <Dropdown.Menu>
-                {/* <Dropdown.Item href="#/action-1">Tomar caso</Dropdown.Item> */}
-                <Dropdown.Item onClick={() => setDocument(row.original)}>Cerrar caso</Dropdown.Item>
+                {!row.original.agent?.id && <Dropdown.Item onClick={() => takeCase(row.original.id)}>Tomar caso</Dropdown.Item>}
+                {row.original.agent?.id === currentUser.id && <Dropdown.Item onClick={() => setDocument(row.original)}>Cerrar caso</Dropdown.Item>}
               </Dropdown.Menu>
             </Dropdown>
 

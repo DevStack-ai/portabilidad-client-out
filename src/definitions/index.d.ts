@@ -27,6 +27,11 @@ export interface Reason {
   id: number;
   description: string;
 }
+
+export interface Agent {
+  id: number;
+  username: string;
+}
 export interface PortaRequestOut {
   id: number;
   phone: string;
@@ -52,7 +57,7 @@ export interface PortaRequestOut {
   signed_file_url?: string;
   reason?: Reason;
   topologia?: Topologia;
-
+  agent?: Agent;
   // Omit relationship fields (user, origin) as they're not directly part of the interface
 }
 

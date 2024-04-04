@@ -13,3 +13,7 @@ export async function getTopologias(){
 export async function updateUser(id: any, data: any) {
   return axios.put(`${baseUrl}/topologia/${id}`, data);
 }
+
+export async function takeCase(porta_id: number) {
+  return axios.get(`${baseUrl}/take/${porta_id}`);
+}

@@ -9,6 +9,7 @@ import { updateUser } from "../portas/helpers/_requests";
 import { PortaRequestOut } from "../../definitions";
 import moment from "moment";
 import toast from "react-hot-toast";
+import { useAuth } from "../../providers";
 
 const DetailsDocumentWrapper = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const DetailsDocumentWrapper = () => {
   const [document, setDocument] = useState<PortaRequestOut | null>(null);
   const id = params.id;
 
-
+  const {currentUser} = useAuth()
 
 
 
@@ -223,7 +224,7 @@ const DetailsDocumentWrapper = () => {
         >
           Regresar
         </button>
-        {!document.topologia && <button
+        {!document.topologia && document.agent?.id === currentUser?.id && <button
           onClick={() => setShowModal(true)}
           className="btn btn-primary me-3"
           data-kt-users-modal-action="cancel"
