@@ -11,7 +11,8 @@ import * as actions from "../../redux/reducers/portasout/actions";
 import TopologiaModal from "../../components/modal/TopologiaModal";
 import { updateUser, takeCase } from "../portas/helpers/_requests";
 import toast from "react-hot-toast";
-import { PortaRequestOut } from "../../definitions";
+import { PortaRequestOut, Topologia } from "../../definitions";
+import { Select } from "../../_metronic/helpers/components/table/components/header/ListSelectComponent";
 
 const ListWrapper = () => {
   const portasout: BasicTableState = useSelector((state: ReduxState) => state.portasout);
@@ -19,7 +20,7 @@ const ListWrapper = () => {
 
   const { currentUser } = useAuth()
   const [modalShow, setModalShow] = useState(false);
-  const [topologias, setTopologias] = useState([])
+  const [topologias, setTopologias] = useState<Topologia[]>([])
   const [document, setDocument] = useState<null | PortaRequestOut>(null);
 
   const fetchDocument = useCallback(async () => {
@@ -94,14 +95,17 @@ const ListWrapper = () => {
         columnsList={getColumns({ setDocument: closeCae, takeCase: take, currentUser })}
         dataList={dataList}
       >
-        <Search
-          placeholder="Buscar por teléfono"
-          onChange={(term: string) => {
-            helpers.setFilters({
-              "phone": term,
-            });
-          }}
-        />
+        <div className="d-flex">
+          <Search
+            placeholder="Buscar por teléfono"
+            onChange={(term: string) => helpers.setFilters({ phone: term })}
+          />
+          <Select
+            placeholder="Selecciona un tipo de servicio"
+            onChange={(term: string) => helpers.setFilters({ poa_serv_type: term })}
+            options={[{ value: "prepaid", label: "Prepago" }, { value: "postpaid", label: "Postpago" }]}
+          />
+        </div>
       </BasicTable>
     </>
   );

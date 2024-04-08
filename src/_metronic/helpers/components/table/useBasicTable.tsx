@@ -65,6 +65,7 @@ function useBasicTable(endpoint: string, state: BasicTableState, actions: any) {
     _setPage(page);
   };
   const setFilters = (flt: object) => {
+    console.log("setFilters", flt)
     dispatch(actions.setDataTable({
       filters: { ...filters, ...flt },
     }));
