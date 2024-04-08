@@ -29,7 +29,6 @@ const ListWrapper = () => {
     const topologiasQuery = await getTopologias()
     const reasonsQuery = await getReasons()
 
-    console.log(reasonsQuery.data)
     setReasons(reasonsQuery.data)
     setTopologias(topologiasQuery.data)
   }, []);
@@ -103,7 +102,7 @@ const ListWrapper = () => {
             onChange={(term: string) => helpers.setFilters({ phone: term })}
           />
           <Select
-            placeholder="Selecciona una razon"
+            placeholder="Selecciona una razón"
             onChange={(term: string) => helpers.setFilters({ reason_id: term })}
             options={reasons.map((reason) => ({ value: String(reason.status), label: reason.description }))}
           />
