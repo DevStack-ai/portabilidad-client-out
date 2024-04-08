@@ -3,7 +3,7 @@ import { BasicTable } from "../../_metronic/helpers/components/table/BasicTable"
 import { useBasicTable } from "../../_metronic/helpers/components/table/useBasicTable";
 import { useEffect } from "react";
 import { getColumns } from "./helpers/_columns";
-import { getTopologias } from "./helpers/_requests";
+import { getReasons, getTopologias } from "./helpers/_requests";
 import { Search } from "../../_metronic/helpers/components/table/components/header/ListSearchComponent";
 import { useSelector } from "react-redux";
 import { BasicTableState, ReduxState, useAuth } from "../../providers";
@@ -11,7 +11,7 @@ import * as actions from "../../redux/reducers/portasout/actions";
 import TopologiaModal from "../../components/modal/TopologiaModal";
 import { updateUser, takeCase } from "../portas/helpers/_requests";
 import toast from "react-hot-toast";
-import { PortaRequestOut, Topologia } from "../../definitions";
+import { PortaRequestOut, Reason, Topologia } from "../../definitions";
 import { Select } from "../../_metronic/helpers/components/table/components/header/ListSelectComponent";
 
 const ListWrapper = () => {
@@ -21,10 +21,15 @@ const ListWrapper = () => {
   const { currentUser } = useAuth()
   const [modalShow, setModalShow] = useState(false);
   const [topologias, setTopologias] = useState<Topologia[]>([])
+  const [reasons, setReasons] = useState<Reason[]>([])
+
   const [document, setDocument] = useState<null | PortaRequestOut>(null);
 
   const fetchDocument = useCallback(async () => {
     const topologiasQuery = await getTopologias()
+    const reasonsQuery = await getReasons()
+
+    setReasons(reasonsQuery.data)
     setTopologias(topologiasQuery.data)
   }, []);
 
@@ -99,6 +104,11 @@ const ListWrapper = () => {
           <Search
             placeholder="Buscar por teléfono"
             onChange={(term: string) => helpers.setFilters({ phone: term })}
+          />
+          <Select
+            placeholder="Selecciona una razón"
+            onChange={(term: string) => helpers.setFilters({ reason_id: term })}
+            options={reasons.map((reason) => ({ value: String(reason.status), label: reason.description }))}
           />
           <Select
             placeholder="Selecciona un tipo de servicio"
