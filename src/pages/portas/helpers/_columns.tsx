@@ -47,7 +47,14 @@ function getColumns({ setDocument, takeCase, currentUser }) {
         return <>{row.original?.reason?.description}</>
       }
     },
-
+    {
+      Header: "Agente",
+      accessor: "agent",
+  
+      Cell: ({ row }) => {
+        return <>{row.original?.agent?.username}</>
+      }
+    },
     {
       Header: "Fecha de solicitud",
       accessor: "created_at",

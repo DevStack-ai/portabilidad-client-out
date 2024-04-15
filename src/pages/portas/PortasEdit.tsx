@@ -214,6 +214,12 @@ const DetailsDocumentWrapper = () => {
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
           {document.poa_message_pxs}
         </div>
+        <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
+            AGENTE
+        </label>
+        <div className="col-lg-4 col-form-label fw-bold fs-6 ">
+          {document.agent?.username}3
+        </div>
         {
           document.signed_file_url && <>
             <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
