@@ -130,7 +130,7 @@ function getAssigned({ setDocument }) {
 
     {
       Header: "Fecha de solicitud",
-      accessor: "created_at",
+      accessor: "poa_timestamp",
       Cell: ({ value }) => {
         return moment(value).format("DD/MM/YYYY HH:mm A");
       }
@@ -222,7 +222,7 @@ const ClosedColumns: ReadonlyArray<Column<Object>> = [
   },
   {
     Header: "Fecha de solicitud",
-    accessor: "created_at",
+    accessor: "poa_timestamp",
     Cell: ({ value }) => {
       return moment(value).format("DD/MM/YYYY HH:mm A");
     }

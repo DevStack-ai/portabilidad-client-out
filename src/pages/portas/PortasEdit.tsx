@@ -116,7 +116,7 @@ const DetailsDocumentWrapper = () => {
           FECHA DE SOLICITUD
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {moment(document.created_at).format("DD/MM/YYYY hh:mm A")}
+          {moment(document.poa_timestamp).format("DD/MM/YYYY hh:mm A")}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
           NOMBRE
