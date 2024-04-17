@@ -51,7 +51,7 @@ function getColumns({ setDocument, takeCase, currentUser }) {
     },
 
     {
-      Header: "Fecha de solicitud",
+      Header: "FECHA SOLICITUD ASEP",
       accessor: "poa_timestamp",
       Cell: ({ value }) => {
         return moment(value).format("DD/MM/YYYY HH:mm")
@@ -131,7 +131,7 @@ function getAssigned({ setDocument }) {
     },
 
     {
-      Header: "Fecha de solicitud",
+      Header: "FECHA SOLICITUD ASEP",
       accessor: "poa_timestamp",
       Cell: ({ value }) => {
         return moment(value).format("DD/MM/YYYY HH:mm");
@@ -223,7 +223,7 @@ const ClosedColumns: ReadonlyArray<Column<Object>> = [
     }
   },
   {
-    Header: "Fecha de solicitud",
+    Header: "FECHA SOLICITUD ASEP",
     accessor: "poa_timestamp",
     Cell: ({ value }) => {
       return moment(value).format("DD/MM/YYYY HH:mm");
