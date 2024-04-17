@@ -43,7 +43,6 @@
     "react-hot-toast": "^2.4.1",
     "react-inlinesvg": "3.0.0",
     "react-input-mask": "^2.0.4",
-    "react-intl": "5.25.0",
     "react-query": "3.38.0",
     "react-redux": "^8.1.1",
     "react-router-dom": "6.3.0",

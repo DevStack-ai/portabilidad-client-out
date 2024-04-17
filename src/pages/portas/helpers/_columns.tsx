@@ -50,7 +50,7 @@ function getColumns({ setDocument, takeCase, currentUser }) {
 
     {
       Header: "Fecha de solicitud",
-      accessor: "created_at",
+      accessor: "poa_timestamp",
       Cell: ({ value }) => {
         return moment(value).format("DD/MM/YYYY HH:mm A");
       }
