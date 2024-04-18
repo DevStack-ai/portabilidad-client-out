@@ -1,11 +1,13 @@
 // @ts-nocheck
 import { Column } from "react-table";
-import moment from "moment";
+import moment from "moment-timezone";
 import { Link } from "react-router-dom";
 
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
+
+moment.tz.setDefault("UCT");
 
 function getColumns({ setDocument, takeCase, currentUser }) {
   const Columns: ReadonlyArray<Column<Object>> = [
@@ -56,10 +58,10 @@ function getColumns({ setDocument, takeCase, currentUser }) {
       }
     },
     {
-      Header: "Fecha de solicitud",
-      accessor: "created_at",
+      Header: "FECHA SOLICITUD ASEP",
+      accessor: "poa_timestamp",
       Cell: ({ value }) => {
-        return moment(value).format("DD/MM/YYYY HH:mm A");
+        return moment(value).format("DD/MM/YYYY HH:mm")
       }
     },
     {
@@ -136,10 +138,10 @@ function getAssigned({ setDocument }) {
     },
 
     {
-      Header: "Fecha de solicitud",
-      accessor: "created_at",
+      Header: "FECHA SOLICITUD ASEP",
+      accessor: "poa_timestamp",
       Cell: ({ value }) => {
-        return moment(value).format("DD/MM/YYYY HH:mm A");
+        return moment(value).format("DD/MM/YYYY HH:mm");
       }
     },
     {
@@ -228,10 +230,10 @@ const ClosedColumns: ReadonlyArray<Column<Object>> = [
     }
   },
   {
-    Header: "Fecha de solicitud",
-    accessor: "created_at",
+    Header: "FECHA SOLICITUD ASEP",
+    accessor: "poa_timestamp",
     Cell: ({ value }) => {
-      return moment(value).format("DD/MM/YYYY HH:mm A");
+      return moment(value).format("DD/MM/YYYY HH:mm");
     }
   },
   {
