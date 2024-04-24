@@ -11,7 +11,7 @@ function useBasicTable(endpoint: string, state: BasicTableState, actions: any) {
   const [total, setTotal] = useState(state.total);
   const [pages, setPages] = useState(state.pages);
   const [page, _setPage] = useState(state.page);
-  const [filters, _setFilters] = useState(state.filters)
+  const [filters, _setFilters] = useState({})
   const [itemsPerPage, _setItemsPerPage] = useState(state.itemsPerPage);
   const dispatch = useDispatch();
 

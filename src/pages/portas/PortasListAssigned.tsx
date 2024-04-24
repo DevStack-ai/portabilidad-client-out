@@ -7,7 +7,7 @@ import { getTopologias } from "./helpers/_requests";
 import { Search } from "../../_metronic/helpers/components/table/components/header/ListSearchComponent";
 import { useSelector } from "react-redux";
 import { BasicTableState, ReduxState } from "../../providers";
-import * as actions from "../../redux/reducers/portasoutdue/actions";
+import * as actions from "../../redux/reducers/assigned/actions";
 import TopologiaModal from "../../components/modal/TopologiaModal";
 import { updateUser } from "../portas/helpers/_requests";
 import toast from "react-hot-toast";
