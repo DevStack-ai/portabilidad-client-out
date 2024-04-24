@@ -216,7 +216,7 @@ const DetailsDocumentWrapper = () => {
           {document.poa_message_pxs}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-            AGENTE
+          AGENTE
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
           {document.agent?.username}3
@@ -238,7 +238,7 @@ const DetailsDocumentWrapper = () => {
       <div className="text-right w-100 pt-15 d-flex justify-content-end">
         <button
           type="reset"
-          onClick={() => navigate("..")}
+          onClick={() => navigate(-1)}
           className="btn btn-light me-3"
           data-kt-users-modal-action="cancel"
         >
