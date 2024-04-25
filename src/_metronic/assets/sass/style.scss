@@ -30,7 +30,6 @@
     z-index: 999;
     text-align: left;
     top: 0px;
-    overflow: hidden;
     -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -142,7 +141,8 @@
 }
 
 .tableFixHead {
-    overflow: auto;
+    overflow-y: hidden;
+    overflow-x: scroll;
     height: 100px;
 
 }
@@ -196,7 +196,7 @@ td {
 
 td {
     max-width: 300px;
-    text-overflow: ellipsis !important;
+    // text-overflow: ellipsis !important;
 }
 
 th {

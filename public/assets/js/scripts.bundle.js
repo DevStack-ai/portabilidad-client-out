@@ -6740,7 +6740,7 @@ var KTUtil = function() {
             }
 
             if (dir == 'up') { // up
-                el.style.cssText = 'display: block; overflow: hidden;';
+                el.style.cssText = 'display: block; overflow: vivisble;';
 
                 if (calcPaddingTop) {
                     KTUtil.animate(0, calcPaddingTop, speed, function(value) {
@@ -6767,7 +6767,7 @@ var KTUtil = function() {
 
 
             } else if (dir == 'down') { // down
-                el.style.cssText = 'display: block; overflow: hidden;';
+                el.style.cssText = 'display: block; overflow: vivisble;';
 
                 if (calcPaddingTop) {
                     KTUtil.animate(0, calcPaddingTop, speed, function(value) {//

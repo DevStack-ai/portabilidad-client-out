@@ -52,7 +52,7 @@ function getColumns({ setDocument, takeCase, currentUser }) {
     {
       Header: "Agente",
       accessor: "agent",
-  
+
       Cell: ({ row }) => {
         return <>{row.original?.agent?.username}</>
       }

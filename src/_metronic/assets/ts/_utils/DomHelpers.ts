@@ -288,7 +288,7 @@ function slide(el: HTMLElement, dir: string, speed: number, callback: any) {
 
   if (dir === 'up') {
     // up
-    el.style.cssText = 'display: block; overflow: hidden;'
+    el.style.cssText = 'display: block; overflow: vivisble;'
 
     if (calcPaddingTop) {
       ElementAnimateUtil.animate(0, calcPaddingTop, speed, function (value: number) {
@@ -320,7 +320,7 @@ function slide(el: HTMLElement, dir: string, speed: number, callback: any) {
     )
   } else if (dir === 'down') {
     // down
-    el.style.cssText = 'display: block; overflow: hidden;'
+    el.style.cssText = 'display: block; overflow: vivisble;'
 
     if (calcPaddingTop) {
       ElementAnimateUtil.animate(

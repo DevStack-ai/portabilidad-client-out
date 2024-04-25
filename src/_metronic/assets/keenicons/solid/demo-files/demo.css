@@ -54,7 +54,7 @@ input:focus {
   margin-right: 4em;
   margin-bottom: 1em;
   float: left;
-  overflow: hidden;
+  overflow: vivisble;
 }
 .liga {
   width: 80%;

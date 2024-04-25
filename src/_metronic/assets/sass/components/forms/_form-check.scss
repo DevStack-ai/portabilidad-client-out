@@ -145,7 +145,7 @@
 // Image 
 .form-check-image {
     position: relative;
-    overflow: hidden;
+    overflow: vivisble;
 
     img {
         max-width: 100%;    
@@ -156,7 +156,7 @@
         border: 2px solid transparent;    
         transition: $transition-base;
         cursor: pointer;
-        overflow: hidden;
+        overflow: vivisble;
         margin-bottom: 0.75rem;
     }
 
