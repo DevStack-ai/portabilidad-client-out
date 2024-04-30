@@ -16,6 +16,34 @@ function getColumns({ setDocument, takeCase, currentUser }) {
       accessor: "id",
     },
     {
+      Header: "-",
+      accessor: "due_date",
+      Cell: ({ value, row }) => {
+        let color = "green";
+        const today = moment().add(-5, 'hour')
+        const duration = moment(value).diff(today, 'minutes')
+      
+        const diff = duration / 60
+        //if due_date is in the past or in the next hour, color it red 
+        if (diff <= 1) {
+          color = "red";
+        }
+        // is in the next hour and 2 hours its yellow
+        if (diff <= 2 && diff > 1) {
+          color = "yellow";
+        }
+
+        return <div style={{ backgroundColor: color, height: "100%", width: "10px", color: color }} >.</div>
+      }
+    },
+    {
+      Header: "due date",
+      accessor: "_due_date",
+      Cell: ({ row }) => {
+        return moment(row.original.due_date).format("DD/MM/YYYY HH:mm")
+      }
+    },
+    {
       Header: "Telefono",
       accessor: "phone",
     },

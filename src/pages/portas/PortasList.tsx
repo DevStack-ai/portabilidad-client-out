@@ -106,14 +106,24 @@ const ListWrapper = () => {
             onChange={(term: string) => helpers.setFilters({ phone: term })}
           />
           <Select
-            placeholder="Selecciona una razón"
+            placeholder="Selecciona razón"
             onChange={(term: string) => helpers.setFilters({ reason_id: term })}
             options={reasons.map((reason) => ({ value: String(reason.status), label: reason.description }))}
           />
           <Select
-            placeholder="Selecciona un tipo de servicio"
+            placeholder="Selecciona tipo de servicio"
             onChange={(term: string) => helpers.setFilters({ poa_serv_type: term })}
             options={[{ value: "prepaid", label: "Prepago" }, { value: "postpaid", label: "Postpago" }]}
+          />
+          <Select
+            placeholder="Seleccione hora limite"
+            onChange={(term: string) => helpers.setFilters({ soon_due_date: term })}
+            options={[
+              { value: "1", label: "< 1 hora" },
+              { value: "2", label: "< 2 horas" },
+              { value: "3", label: "< 3 horas" },
+              { value: "4", label: "< 4 horas" }
+            ]}
           />
         </div>
       </BasicTable>
