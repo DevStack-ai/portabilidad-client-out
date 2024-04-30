@@ -37,7 +37,7 @@ function getColumns({ setDocument, takeCase, currentUser }) {
       }
     },
     {
-      Header: "due date",
+      Header: "Fecha y Hora de Vencimiento",
       accessor: "_due_date",
       Cell: ({ row }) => {
         return moment(row.original.due_date).format("DD/MM/YYYY HH:mm")
