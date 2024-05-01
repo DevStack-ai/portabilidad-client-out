@@ -94,7 +94,42 @@ const ListWrapper = () => {
         isLoading={helpers.isLoading}
         onSave={updateDocument}
       />}
+      <div className="row flex-row-reverse px-5">
+        <div className="col-1">
+          <div className="card text-center fw-bold h4 center-card" style={{ height: "50px",backgroundColor: "red" }}>
+            1 horas
+            <br />
+            {helpers?.response?.extradata?.danger}
+          </div>
+        </div>
+        <div className="col-1">
+          <div className="card text-center fw-bold h4 center-card" style={{ height: "50px",backgroundColor: "orange" }}>
+            2 horas
+            <br />
 
+            {helpers?.response?.extradata?.warning}
+
+          </div>
+        </div>
+        <div className="col-1">
+          <div className="card text-center fw-bold h4 center-card" style={{ height: "50px",backgroundColor: "yellow" }}>
+            3 horas
+            <br />
+
+            {helpers?.response?.extradata?.alert}
+
+          </div>
+        </div>
+        <div className="col-1">
+          <div className="card text-center fw-bold h4 center-card" style={{ height: "50px",backgroundColor: "green" }}>
+            4 horas
+            <br />
+
+            {helpers?.response?.extradata?.safe}
+
+          </div>
+        </div>
+      </div>
       <BasicTable
         {...helpers}
         columnsList={getColumns({ setDocument: closeCae, takeCase: take, currentUser })}

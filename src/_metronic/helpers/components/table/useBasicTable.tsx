@@ -7,6 +7,7 @@ function useBasicTable(endpoint: string, state: BasicTableState, actions: any) {
   const baseUrl = `${import.meta.env.VITE_API_URL}${endpoint}`;
   const [isLoading, setIsLoading] = useState(false);
 
+  const [response, setResponse] = useState<any>({})
   const [dataList, setDataList] = useState(state.dataList);
   const [total, setTotal] = useState(state.total);
   const [pages, setPages] = useState(state.pages);
@@ -34,6 +35,7 @@ function useBasicTable(endpoint: string, state: BasicTableState, actions: any) {
       setPages(response.pages);
       setDataList(response.rows);
       setTotal(response.count);
+      setResponse(response)
       if (actions && actions.setDataTable) {
         dispatch(
           actions.setDataTable({
@@ -80,7 +82,7 @@ function useBasicTable(endpoint: string, state: BasicTableState, actions: any) {
     helpers: {
       filters,
       setFilters,
-
+      response,
       isLoading,
       fetchData,
       pages,
