@@ -51,7 +51,7 @@ const AsideDefault = () => {
           className="app-sidebar-logo flex-shrink-0 d-none d-md-flex align-items-center px-8"
           id="kt_app_sidebar_logo"
         >
-          <Link to="/dashboard">
+          {/* <Link to="/dashboard"> */}
             <div>
               <img
                 src={toAbsoluteUrl("/media/logos/default.png")}
@@ -64,7 +64,7 @@ const AsideDefault = () => {
                 className="h-25px h-lg-50px d-none d-sm-inline app-sidebar-logo-default theme-dark-show"
               />
             </div>
-          </Link>
+          {/* </Link> */}
         </div>
 
         <div className="app-sidebar-menu overflow-hidden flex-column-fluid">
@@ -84,12 +84,12 @@ const AsideDefault = () => {
               data-kt-menu="true"
               data-kt-menu-expand="false"
             >
-              <AsideMenuItem
+              {/* <AsideMenuItem
                 to="/dashboard"
                 icon="element-11"
                 title="Dashboard"
                 fontIcon="ki-outline"
-              />
+              /> */}
 
               <div className="menu-item pt-5">
                 <div className="menu-content">

@@ -6,7 +6,7 @@ import {MegaMenu} from './MegaMenu'
 export function MenuInner() {
   return (
     <>
-      <MenuItem title={"Dashboard"} to='/dashboard' />
+      {/* <MenuItem title={"Dashboard"} to='/dashboard' /> */}
       <MenuItem title='Layout Builder' to='/builder' />
       <MenuInnerWithSub
         title='Crafted'

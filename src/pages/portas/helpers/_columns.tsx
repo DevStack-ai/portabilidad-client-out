@@ -22,15 +22,16 @@ function getColumns({ setDocument, takeCase, currentUser }) {
         let color = "green";
         const today = moment().add(-5, 'hour')
         const duration = moment(value).diff(today, 'minutes')
-      
+
         const diff = duration / 60
-        //if due_date is in the past or in the next hour, color it red 
         if (diff <= 1) {
           color = "red";
         }
-        // is in the next hour and 2 hours its yellow
         if (diff <= 2 && diff > 1) {
-          color = "yellow";
+          color = "orange";
+        }
+        if (diff <= 3 && diff > 2) {
+          color = "yellow"
         }
 
         return <div style={{ backgroundColor: color, height: "100%", width: "10px", color: color }} >.</div>
@@ -262,6 +263,13 @@ const ClosedColumns: ReadonlyArray<Column<Object>> = [
     accessor: "poa_timestamp",
     Cell: ({ value }) => {
       return moment(value).format("DD/MM/YYYY HH:mm");
+    }
+  },
+  {
+    Header: "Fecha y Hora de Cierre",
+    accessor: "closed_at",
+    Cell: ({ value }) => {
+      return value ? moment(value).add(-5, "hour").format("DD/MM/YYYY HH:mm") : null;
     }
   },
   {
