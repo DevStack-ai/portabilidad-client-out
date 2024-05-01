@@ -96,7 +96,7 @@ const ListWrapper = () => {
       />}
       <div className="row flex-row-reverse px-5">
         <div className="col-1">
-          <div className="card text-center fw-bold h4 center-card" style={{ height: "50px",backgroundColor: "red" }}>
+          <div className="card text-center fw-bold h4 center-card" style={{ height: "50px",backgroundColor: "red", color: "white" }}>
             1 horas
             <br />
             {helpers?.response?.extradata?.danger}
@@ -121,7 +121,7 @@ const ListWrapper = () => {
           </div>
         </div>
         <div className="col-1">
-          <div className="card text-center fw-bold h4 center-card" style={{ height: "50px",backgroundColor: "green" }}>
+          <div className="card text-center fw-bold h4 center-card" style={{ height: "50px",backgroundColor: "green", color: "white" }}>
             4 horas
             <br />
 
