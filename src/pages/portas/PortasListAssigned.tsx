@@ -72,20 +72,31 @@ const ListWrapper = () => {
         isLoading={helpers.isLoading}
         onSave={updateDocument}
       />}
-      asd
+
       <BasicTable
         {...helpers}
         columnsList={getAssigned({ setDocument: closeCae })}
         dataList={dataList}
       >
-        <Search
-          placeholder="Buscar por teléfono"
-          onChange={(term: string) => {
-            helpers.setFilters({
-              "phone": term,
-            });
-          }}
-        />
+        <div className="d-flex gap-3">
+          <Search
+            placeholder="Buscar por teléfono"
+            onChange={(term: string) => {
+              helpers.setFilters({
+                "phone": term,
+              });
+            }}
+          />
+
+          <Search
+            placeholder="Buscar por ID de transacción"
+            onChange={(term: string) => {
+              helpers.setFilters({
+                "id": term,
+              });
+            }}
+          />
+        </div>
       </BasicTable>
     </>
   );

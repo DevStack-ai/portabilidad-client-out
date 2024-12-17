@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { BasicTableState, ReduxState, useAuth } from "../../providers";
 import * as actions from "../../redux/reducers/portasoutdue/actions";
 import TopologiaModal from "../../components/modal/TopologiaModal";
-import { updateUser, takeCase} from "../portas/helpers/_requests";
+import { updateUser, takeCase } from "../portas/helpers/_requests";
 import toast from "react-hot-toast";
 import { PortaRequestOut } from "../../definitions";
 
@@ -55,7 +55,7 @@ const ListWrapper = () => {
   function closeCae(document: PortaRequestOut) {
     setDocument(document)
     setModalShow(true)
-  
+
   }
   async function take(porta_id: number) {
     try {
@@ -90,14 +90,25 @@ const ListWrapper = () => {
         columnsList={getColumns({ setDocument: closeCae, takeCase: take, currentUser })}
         dataList={dataList}
       >
-        <Search
-          placeholder="Buscar por teléfono"
-          onChange={(term: string) => {
-            helpers.setFilters({
-              "phone": term,
-            });
-          }}
-        />
+        <div className="d-flex gap-3">
+          <Search
+            placeholder="Buscar por teléfono"
+            onChange={(term: string) => {
+              helpers.setFilters({
+                "phone": term,
+              });
+            }}
+          />
+
+          <Search
+            placeholder="Buscar por ID de transacción"
+            onChange={(term: string) => {
+              helpers.setFilters({
+                "id": term,
+              });
+            }}
+          />
+        </div>
       </BasicTable>
     </>
   );

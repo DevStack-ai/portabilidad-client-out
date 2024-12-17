@@ -94,14 +94,25 @@ const ListWrapper = () => {
         columnsList={getColumns({ setDocument: closeCae, takeCase: take, currentUser })}
         dataList={dataList}
       >
-        <Search
-          placeholder="Buscar por teléfono"
-          onChange={(term: string) => {
-            helpers.setFilters({
-              "phone": term,
-            });
-          }}
-        />
+        <div className="d-flex gap-3">
+          <Search
+            placeholder="Buscar por teléfono"
+            onChange={(term: string) => {
+              helpers.setFilters({
+                "phone": term,
+              });
+            }}
+          />
+
+          <Search
+            placeholder="Buscar por ID de transacción"
+            onChange={(term: string) => {
+              helpers.setFilters({
+                "id": term,
+              });
+            }}
+          />
+        </div>
       </BasicTable>
     </>
   );
