@@ -42,7 +42,7 @@
         @include border-radius($dropdown-border-radius);
         background-color: var(--#{$prefix}body-bg);
         position: relative;
-        overflow: hidden;
+        overflow: vivisble;
 
         ul {
             padding: 1rem 0;

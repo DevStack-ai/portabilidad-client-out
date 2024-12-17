@@ -10,6 +10,11 @@ export async function getTopologias(){
   return axios.get(`${import.meta.env.VITE_API_URL}/topologias/select`);
 }
 
+export async function getReasons(){
+  return axios.get(`${import.meta.env.VITE_API_URL}/reason/select`);
+
+}
+
 export async function updateUser(id: any, data: any) {
   return axios.put(`${baseUrl}/topologia/${id}`, data);
 }

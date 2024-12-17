@@ -18,20 +18,9 @@ const PrivateRoutes = () => {
   return (
     <Routes>
       <Route element={<MasterLayout />}>
-        {/* Redirect to Dashboard after success login/registartion */}
-        <Route path="auth/*" element={<Navigate to="/dashboard" />} />
-        {/* Pages */}
-        <Route path="dashboard" element={<DashboardWrapper />} />
-        {/* Lazy Modules */}
+        <Route path="auth/*" element={<Navigate to="/portas-out/view" />} />
+        {/* <Route path="dashboard" element={<DashboardWrapper />} /> */}
 
-        {/* <Route
-          path="/users/*"
-          element={
-            <SuspensedView>
-              <UsersPage />
-            </SuspensedView>
-          }
-        />*/}
         <Route
           path="/topologias/*"
           element={
@@ -48,7 +37,7 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
-        <Route path="*" element={<Navigate to="/error/404" />} />
+        <Route path="*" element={<Navigate to="/portas-out/view" />} />
       </Route>
     </Routes>
   );

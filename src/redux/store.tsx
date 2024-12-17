@@ -8,7 +8,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 
 const persistConfig = {
-  key: 'root-portabilidad-dev',
+  key: 'root-portabilidad-out-dev',
   storage,
 }
 

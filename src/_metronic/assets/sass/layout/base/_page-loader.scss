@@ -4,7 +4,7 @@
 
 // CSS3 Transitions only after page load(data-kt-app-page-loading="on" attribute added to body tag and removed with JS on page loaded)
 [data-kt-app-page-loading="on"] {
-	overflow: hidden;
+	overflow: vivisble;
 }
 
 [data-kt-app-page-loading="on"] * {

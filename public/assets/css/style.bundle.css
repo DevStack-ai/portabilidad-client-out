@@ -2356,7 +2356,7 @@ progress {
   }
 }
 .form-control[type=file] {
-  overflow: hidden;
+  overflow: vivisble;
 }
 .form-control[type=file]:not(:disabled):not([readonly]) {
   cursor: pointer;
@@ -2793,7 +2793,7 @@ textarea.form-control-lg {
   width: 100%;
   height: 100%;
   padding: 1rem 1rem;
-  overflow: hidden;
+  overflow: vivisble;
   text-align: start;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -3526,7 +3526,7 @@ textarea.form-control-lg {
 
 .collapsing {
   height: 0;
-  overflow: hidden;
+  overflow: vivisble;
   transition: height 0.35s ease;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3795,7 +3795,7 @@ textarea.form-control-lg {
 .dropdown-divider {
   height: 0;
   margin: var(--bs-dropdown-divider-margin-y) 0;
-  overflow: hidden;
+  overflow: vivisble;
   border-top: 1px solid var(--bs-dropdown-divider-bg);
   opacity: 1;
 }
@@ -5112,7 +5112,7 @@ textarea.form-control-lg {
   --bs-progress-bar-transition: width 0.6s ease;
   display: flex;
   height: var(--bs-progress-height);
-  overflow: hidden;
+  overflow: vivisble;
   font-size: var(--bs-progress-font-size);
   background-color: var(--bs-progress-bg);
   border-radius: var(--bs-progress-border-radius);
@@ -5123,7 +5123,7 @@ textarea.form-control-lg {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
+  overflow: vivisble;
   color: var(--bs-progress-bar-color);
   text-align: center;
   white-space: nowrap;
@@ -5687,7 +5687,7 @@ textarea.form-control-lg {
 }
 .modal-dialog-scrollable .modal-content {
   max-height: 100%;
-  overflow: hidden;
+  overflow: vivisble;
 }
 .modal-dialog-scrollable .modal-body {
   overflow-y: auto;
@@ -6190,7 +6190,7 @@ textarea.form-control-lg {
 .carousel-inner {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow: vivisble;
 }
 .carousel-inner::after {
   display: block;
@@ -7303,7 +7303,7 @@ textarea.form-control-lg {
   height: 1px !important;
   padding: 0 !important;
   margin: -1px !important;
-  overflow: hidden !important;
+  overflow: vivisble !important;
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
   border: 0 !important;
@@ -7320,7 +7320,7 @@ textarea.form-control-lg {
 }
 
 .text-truncate {
-  overflow: hidden;
+  overflow: vivisble;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -7431,7 +7431,7 @@ textarea.form-control-lg {
 }
 
 .overflow-hidden {
-  overflow: hidden !important;
+  overflow: vivisble !important;
 }
 
 .overflow-visible {
@@ -12606,7 +12606,7 @@ textarea.form-control-lg {
     overflow: auto !important;
   }
   .overflow-sm-hidden {
-    overflow: hidden !important;
+    overflow: vivisble !important;
   }
   .overflow-sm-visible {
     overflow: visible !important;
@@ -15653,7 +15653,7 @@ textarea.form-control-lg {
     overflow: auto !important;
   }
   .overflow-md-hidden {
-    overflow: hidden !important;
+    overflow: vivisble !important;
   }
   .overflow-md-visible {
     overflow: visible !important;
@@ -18700,7 +18700,7 @@ textarea.form-control-lg {
     overflow: auto !important;
   }
   .overflow-lg-hidden {
-    overflow: hidden !important;
+    overflow: vivisble !important;
   }
   .overflow-lg-visible {
     overflow: visible !important;
@@ -21747,7 +21747,7 @@ textarea.form-control-lg {
     overflow: auto !important;
   }
   .overflow-xl-hidden {
-    overflow: hidden !important;
+    overflow: vivisble !important;
   }
   .overflow-xl-visible {
     overflow: visible !important;
@@ -24794,7 +24794,7 @@ textarea.form-control-lg {
     overflow: auto !important;
   }
   .overflow-xxl-hidden {
-    overflow: hidden !important;
+    overflow: vivisble !important;
   }
   .overflow-xxl-visible {
     overflow: visible !important;
@@ -29272,7 +29272,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   display: flex;
   align-items: stretch;
   position: relative;
-  overflow: hidden;
+  overflow: vivisble;
   flex-shrink: 0;
   margin-left: 5px;
   width: 9px;
@@ -36673,7 +36673,7 @@ code:not([class*=language-]) {
 
 .form-check-image {
   position: relative;
-  overflow: hidden;
+  overflow: vivisble;
 }
 .form-check-image img {
   max-width: 100%;
@@ -36683,7 +36683,7 @@ code:not([class*=language-]) {
   border: 2px solid transparent;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
-  overflow: hidden;
+  overflow: vivisble;
   margin-bottom: 0.75rem;
 }
 .form-check-image .form-check-rounded {
@@ -38854,7 +38854,7 @@ code:not([class*=language-]) {
 .image-input [data-kt-image-input-action=change] input {
   width: 0 !important;
   height: 0 !important;
-  overflow: hidden;
+  overflow: vivisble;
   opacity: 0;
 }
 .image-input [data-kt-image-input-action=cancel],
@@ -43291,7 +43291,7 @@ code:not([class*=language-]) {
   left: 0;
   bottom: 0;
   right: 0;
-  overflow: hidden;
+  overflow: vivisble;
   z-index: 109;
   background-color: var(--bs-drawer-overlay-bg-color);
   animation: animation-drawer-fade-in 0.3s ease-in-out 1;
@@ -43311,7 +43311,7 @@ code:not([class*=language-]) {
 }
 @media (max-width: 991.98px) {
   body[data-kt-drawer=on] {
-    overflow: hidden;
+    overflow: vivisble;
   }
 }
 .badge {
@@ -43728,7 +43728,7 @@ div:hover::-webkit-scrollbar-corner {
 @media (min-width: 992px) {
   .hover-scroll,
 .hover-scroll-overlay {
-    overflow: hidden;
+    overflow: vivisble;
   }
   @-moz-document url-prefix() {
     .hover-scroll,
@@ -47189,7 +47189,7 @@ body,
 }
 
 [data-kt-app-page-loading=on] {
-  overflow: hidden;
+  overflow: vivisble;
 }
 
 [data-kt-app-page-loading=on] * {

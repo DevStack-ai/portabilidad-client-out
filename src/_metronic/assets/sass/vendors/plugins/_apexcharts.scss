@@ -29,7 +29,7 @@
 	padding: 0.5rem 0 !important;
 	box-shadow: var(--#{$prefix}dropdown-box-shadow);
 	border-radius: $border-radius !important;
-	overflow: hidden;
+	overflow: vivisble;
 	min-width: 10rem !important;
 
 	.apexcharts-menu-item {

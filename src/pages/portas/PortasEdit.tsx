@@ -7,9 +7,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getTopologias, getUser, takeCase } from "./helpers/_requests";
 import { updateUser } from "../portas/helpers/_requests";
 import { PortaRequestOut } from "../../definitions";
-import moment from "moment";
+import moment from "moment-timezone";
 import toast from "react-hot-toast";
 import { useAuth } from "../../providers";
+moment.tz.setDefault("UCT");
 
 const DetailsDocumentWrapper = () => {
   const navigate = useNavigate();
@@ -113,10 +114,10 @@ const DetailsDocumentWrapper = () => {
           {document.phone}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
-          FECHA DE SOLICITUD
+          FECHA SOLICITUD ASEP
         </label>
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
-          {moment(document.created_at).format("DD/MM/YYYY hh:mm A")}
+          {moment(document.poa_timestamp).format("DD/MM/YYYY HH:mm")}
         </div>
         <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
           NOMBRE
@@ -214,6 +215,12 @@ const DetailsDocumentWrapper = () => {
         <div className="col-lg-4 col-form-label fw-bold fs-6 ">
           {document.poa_message_pxs}
         </div>
+        <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
+          AGENTE
+        </label>
+        <div className="col-lg-4 col-form-label fw-bold fs-6 ">
+          {document.agent?.username}3
+        </div>
         {
           document.signed_file_url && <>
             <label className="col-sm-12 col-lg-2 col-form-label fw-bold fs-6">
@@ -231,7 +238,7 @@ const DetailsDocumentWrapper = () => {
       <div className="text-right w-100 pt-15 d-flex justify-content-end">
         <button
           type="reset"
-          onClick={() => navigate("..")}
+          onClick={() => navigate(-1)}
           className="btn btn-light me-3"
           data-kt-users-modal-action="cancel"
         >
@@ -244,7 +251,7 @@ const DetailsDocumentWrapper = () => {
         >
           Tomar Caso
         </button>}
-        {(!document.topologia && document.agent?.id === currentUser?.id )&& <button
+        {(!document.topologia && document.agent?.id === currentUser?.id) && <button
           onClick={() => setShowModal(true)}
           className="btn btn-primary me-3"
           data-kt-users-modal-action="cancel"

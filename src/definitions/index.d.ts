@@ -25,6 +25,7 @@ export interface Topologia {
 }
 export interface Reason {
   id: number;
+  status: number;
   description: string;
 }
 

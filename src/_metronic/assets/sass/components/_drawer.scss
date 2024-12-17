@@ -37,7 +37,7 @@
 	left: 0;
 	bottom: 0;
 	right: 0;
-	overflow: hidden;
+	overflow: vivisble;
 	z-index: $drawer-z-index - 1;
 	background-color: var(--#{$prefix}drawer-overlay-bg-color);
 	animation: animation-drawer-fade-in $drawer-overlay-animation-speed ease-in-out 1;
@@ -57,6 +57,6 @@
 // Tablet & Mobile Modes
 @include media-breakpoint-down(lg) {
 	body[data-kt-drawer="on"] {
-		overflow: hidden;
+		overflow: vivisble;
 	}
 }

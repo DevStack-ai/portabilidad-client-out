@@ -1,17 +1,48 @@
 // @ts-nocheck
 import { Column } from "react-table";
-import moment from "moment";
+import moment from "moment-timezone";
 import { Link } from "react-router-dom";
 
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 
+moment.tz.setDefault("UCT");
+
 function getColumns({ setDocument, takeCase, currentUser }) {
   const Columns: ReadonlyArray<Column<Object>> = [
     {
       Header: "ID",
       accessor: "id",
+    },
+    {
+      Header: "-",
+      accessor: "due_date",
+      Cell: ({ value, row }) => {
+        let color = "green";
+        const today = moment().add(-5, 'hour')
+        const duration = moment(value).diff(today, 'minutes')
+
+        const diff = duration / 60
+        if (diff <= 1) {
+          color = "red";
+        }
+        if (diff <= 2 && diff > 1) {
+          color = "orange";
+        }
+        if (diff <= 3 && diff > 2) {
+          color = "yellow"
+        }
+
+        return <div style={{ backgroundColor: color, height: "100%", width: "10px", color: color }} >.</div>
+      }
+    },
+    {
+      Header: "Fecha y Hora de Vencimiento",
+      accessor: "_due_date",
+      Cell: ({ row }) => {
+        return moment(row.original.due_date).format("DD/MM/YYYY HH:mm")
+      }
     },
     {
       Header: "Telefono",
@@ -47,12 +78,19 @@ function getColumns({ setDocument, takeCase, currentUser }) {
         return <>{row.original?.reason?.description}</>
       }
     },
-
     {
-      Header: "Fecha de solicitud",
-      accessor: "created_at",
+      Header: "Agente",
+      accessor: "agent",
+
+      Cell: ({ row }) => {
+        return <>{row.original?.agent?.username}</>
+      }
+    },
+    {
+      Header: "FECHA SOLICITUD ASEP",
+      accessor: "poa_timestamp",
       Cell: ({ value }) => {
-        return moment(value).format("DD/MM/YYYY HH:mm A");
+        return moment(value).format("DD/MM/YYYY HH:mm")
       }
     },
     {
@@ -129,10 +167,10 @@ function getAssigned({ setDocument }) {
     },
 
     {
-      Header: "Fecha de solicitud",
-      accessor: "created_at",
+      Header: "FECHA SOLICITUD ASEP",
+      accessor: "poa_timestamp",
       Cell: ({ value }) => {
-        return moment(value).format("DD/MM/YYYY HH:mm A");
+        return moment(value).format("DD/MM/YYYY HH:mm");
       }
     },
     {
@@ -221,10 +259,17 @@ const ClosedColumns: ReadonlyArray<Column<Object>> = [
     }
   },
   {
-    Header: "Fecha de solicitud",
-    accessor: "created_at",
+    Header: "FECHA SOLICITUD ASEP",
+    accessor: "poa_timestamp",
     Cell: ({ value }) => {
-      return moment(value).format("DD/MM/YYYY HH:mm A");
+      return moment(value).format("DD/MM/YYYY HH:mm");
+    }
+  },
+  {
+    Header: "Fecha y Hora de Cierre",
+    accessor: "closed_at",
+    Cell: ({ value }) => {
+      return value ? moment(value).add(-5, "hour").format("DD/MM/YYYY HH:mm") : null;
     }
   },
   {

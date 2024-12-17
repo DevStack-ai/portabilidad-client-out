@@ -7,18 +7,19 @@ import { getTopologias } from "./helpers/_requests";
 import { Search } from "../../_metronic/helpers/components/table/components/header/ListSearchComponent";
 import { useSelector } from "react-redux";
 import { BasicTableState, ReduxState } from "../../providers";
-import * as actions from "../../redux/reducers/portasoutdue/actions";
+import * as actions from "../../redux/reducers/assigned/actions";
 import TopologiaModal from "../../components/modal/TopologiaModal";
 import { updateUser } from "../portas/helpers/_requests";
 import toast from "react-hot-toast";
-import { PortaRequestOut } from "../../definitions";
+import { PortaRequestOut, Topologia } from "../../definitions";
+import { Select } from "../../_metronic/helpers/components/table/components/header/ListSelectComponent";
 
 const ListWrapper = () => {
   const assigned: BasicTableState = useSelector((state: ReduxState) => state.assigned);
   const { dataList, helpers } = useBasicTable("/porta-request-out/assign", assigned, actions);
 
   const [modalShow, setModalShow] = useState(false);
-  const [topologias, setTopologias] = useState([])
+  const [topologias, setTopologias] = useState<Topologia[]>([])
   const [document, setDocument] = useState<null | PortaRequestOut>(null);
 
   const fetchDocument = useCallback(async () => {
@@ -78,23 +79,19 @@ const ListWrapper = () => {
         columnsList={getAssigned({ setDocument: closeCae })}
         dataList={dataList}
       >
-        <div className="d-flex gap-3">
+        <div className="d-flex">
           <Search
             placeholder="Buscar por teléfono"
-            onChange={(term: string) => {
-              helpers.setFilters({
-                "phone": term,
-              });
-            }}
+            onChange={(term: string) => helpers.setFilters({ phone: term })}
           />
-
           <Search
             placeholder="Buscar por ID de transacción"
-            onChange={(term: string) => {
-              helpers.setFilters({
-                "id": term,
-              });
-            }}
+            onChange={(term: string) => helpers.setFilters({ id: term })}
+          />
+          <Select
+            placeholder="Selecciona un tipo de servicio"
+            onChange={(term: string) => helpers.setFilters({ poa_serv_type: term })}
+            options={[{ value: "prepaid", label: "Prepago" }, { value: "postpaid", label: "Postpago" }]}
           />
         </div>
       </BasicTable>

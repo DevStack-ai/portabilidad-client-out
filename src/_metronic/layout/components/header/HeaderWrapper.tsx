@@ -48,7 +48,7 @@ export function HeaderWrapper() {
             <KTIcon iconName="abstract-14" className="fs-2" />
           </div>
 
-          <Link to="/dashboard" className="d-flex align-items-center">
+          {/* <Link to="/dashboard" className="d-flex align-items-center"> */}
             <div>
               <img
                 src={toAbsoluteUrl("/media/logos/default-small.png")}
@@ -61,7 +61,7 @@ export function HeaderWrapper() {
                 className="h-35px dark-logo"
               />
             </div>
-          </Link>
+          {/* </Link> */}
         </div>
         <Topbar />
       </div>

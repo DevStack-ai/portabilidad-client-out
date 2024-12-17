@@ -108,7 +108,7 @@ $select2-input-padding-y-lg: $input-padding-y-lg - $select2-tag-padding-y-lg * 2
 			display: block;
 			padding-left: 0;
 			padding-right: 0;
-			overflow: hidden;
+			overflow: vivisble;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 			color: var(--#{$prefix}input-color);

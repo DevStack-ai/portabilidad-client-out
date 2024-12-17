@@ -3,7 +3,7 @@ import { BasicTable } from "../../_metronic/helpers/components/table/BasicTable"
 import { useBasicTable } from "../../_metronic/helpers/components/table/useBasicTable";
 import { useEffect } from "react";
 import { getColumns } from "./helpers/_columns";
-import { getTopologias } from "./helpers/_requests";
+import { getTopologias, getReasons } from "./helpers/_requests";
 import { Search } from "../../_metronic/helpers/components/table/components/header/ListSearchComponent";
 import { useSelector } from "react-redux";
 import { BasicTableState, ReduxState, useAuth } from "../../providers";
@@ -11,7 +11,8 @@ import * as actions from "../../redux/reducers/portasoutdue/actions";
 import TopologiaModal from "../../components/modal/TopologiaModal";
 import { updateUser, takeCase } from "../portas/helpers/_requests";
 import toast from "react-hot-toast";
-import { PortaRequestOut } from "../../definitions";
+import { PortaRequestOut, Reason, Topologia } from "../../definitions";
+import { Select } from "../../_metronic/helpers/components/table/components/header/ListSelectComponent";
 
 const ListWrapper = () => {
   const portasoutdue: BasicTableState = useSelector((state: ReduxState) => state.portasoutdue);
@@ -19,11 +20,16 @@ const ListWrapper = () => {
 
   const { currentUser } = useAuth()
   const [modalShow, setModalShow] = useState(false);
-  const [topologias, setTopologias] = useState([])
+  const [topologias, setTopologias] = useState<Topologia[]>([])
+  const [reasons, setReasons] = useState<Reason[]>([])
+
   const [document, setDocument] = useState<null | PortaRequestOut>(null);
 
   const fetchDocument = useCallback(async () => {
     const topologiasQuery = await getTopologias()
+    const reasonsQuery = await getReasons()
+
+    setReasons(reasonsQuery.data)
     setTopologias(topologiasQuery.data)
   }, []);
 
@@ -90,23 +96,24 @@ const ListWrapper = () => {
         columnsList={getColumns({ setDocument: closeCae, takeCase: take, currentUser })}
         dataList={dataList}
       >
-        <div className="d-flex gap-3">
+        <div className="d-flex">
           <Search
             placeholder="Buscar por teléfono"
-            onChange={(term: string) => {
-              helpers.setFilters({
-                "phone": term,
-              });
-            }}
+            onChange={(term: string) => helpers.setFilters({ phone: term })}
           />
-
           <Search
             placeholder="Buscar por ID de transacción"
-            onChange={(term: string) => {
-              helpers.setFilters({
-                "id": term,
-              });
-            }}
+            onChange={(term: string) => helpers.setFilters({ id: term })}
+          />
+          <Select
+            placeholder="Selecciona una razón"
+            onChange={(term: string) => helpers.setFilters({ reason_id: term })}
+            options={reasons.map((reason) => ({ value: String(reason.status), label: reason.description }))}
+          />
+          <Select
+            placeholder="Selecciona un tipo de servicio"
+            onChange={(term: string) => helpers.setFilters({ poa_serv_type: term })}
+            options={[{ value: "prepaid", label: "Prepago" }, { value: "postpaid", label: "Postpago" }]}
           />
         </div>
       </BasicTable>
