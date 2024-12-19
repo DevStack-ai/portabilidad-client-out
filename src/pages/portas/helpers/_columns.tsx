@@ -9,7 +9,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 moment.tz.setDefault("UCT");
 
-function getColumns({ setDocument, takeCase, currentUser }) {
+function getColumns({ setDocument, takeCase, currentUser, generateToken }) {
   const Columns: ReadonlyArray<Column<Object>> = [
     {
       Header: "ID",
@@ -113,6 +113,7 @@ function getColumns({ setDocument, takeCase, currentUser }) {
                 && <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic" />}
 
               <Dropdown.Menu>
+                {!row.original.signed_file_url && <Dropdown.Item onClick={() => generateToken(row.original)}>Generar nuevo enlace</Dropdown.Item>}
                 {!row.original.agent?.id && <Dropdown.Item onClick={() => takeCase(row.original.id)}>Tomar caso</Dropdown.Item>}
                 {row.original.agent?.id === currentUser.id && <Dropdown.Item onClick={() => setDocument(row.original)}>Cerrar caso</Dropdown.Item>}
               </Dropdown.Menu>

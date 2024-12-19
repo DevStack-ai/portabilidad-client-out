@@ -22,3 +22,7 @@ export async function updateUser(id: any, data: any) {
 export async function takeCase(porta_id: number) {
   return axios.get(`${baseUrl}/take/${porta_id}`);
 }
+
+export async function regeneratePorta(id: any) {
+  return axios.post(`${baseUrl}/regenerate/${id}`);
+}

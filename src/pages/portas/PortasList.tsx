@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { BasicTableState, ReduxState, useAuth } from "../../providers";
 import * as actions from "../../redux/reducers/portasout/actions";
 import TopologiaModal from "../../components/modal/TopologiaModal";
+import NewUrlModal from "../../components/modal/NewURL";
 import { updateUser, takeCase } from "../portas/helpers/_requests";
 import toast from "react-hot-toast";
 import { PortaRequestOut, Reason, Topologia } from "../../definitions";
@@ -16,10 +17,12 @@ import { Select } from "../../_metronic/helpers/components/table/components/head
 
 const ListWrapper = () => {
   const portasout: BasicTableState = useSelector((state: ReduxState) => state.portasout);
-  const { dataList, helpers } = useBasicTable("/porta-request-out", portasout, actions);
+  const { dataList, helpers } = useBasicTable("/porta-request-out", { ...portasout, filters: {} }, actions);
 
   const { currentUser } = useAuth()
   const [modalShow, setModalShow] = useState(false);
+  const [modalUrl, setmodalUrl] = useState(false);
+
   const [topologias, setTopologias] = useState<Topologia[]>([])
   const [reasons, setReasons] = useState<Reason[]>([])
 
@@ -64,6 +67,16 @@ const ListWrapper = () => {
 
   }
 
+  function generateToken(document: PortaRequestOut) {
+    console.log(document)
+    setDocument(document)
+    setmodalUrl(true)
+  }
+
+  function updateUrl() {
+    setmodalUrl(false)
+  }
+
   async function take(porta_id: number) {
     try {
       console.log(porta_id)
@@ -94,6 +107,12 @@ const ListWrapper = () => {
         isLoading={helpers.isLoading}
         onSave={updateDocument}
       />}
+      {document?.id && <NewUrlModal
+        show={modalUrl}
+        document={document}
+        onSave={updateUrl}
+      />}
+
       <div className="row flex-row-reverse px-5">
         <div className="col-1">
           <div className="card text-center fw-bold h4 center-card" style={{ height: "50px", backgroundColor: "red", color: "white" }}>
@@ -132,7 +151,7 @@ const ListWrapper = () => {
       </div>
       <BasicTable
         {...helpers}
-        columnsList={getColumns({ setDocument: closeCae, takeCase: take, currentUser })}
+        columnsList={getColumns({ setDocument: closeCae, takeCase: take, currentUser, generateToken })}
         dataList={dataList}
       >
         <div className="d-flex">
@@ -163,6 +182,17 @@ const ListWrapper = () => {
               { value: "2", label: "< 2 horas" },
               { value: "3", label: "< 3 horas" },
               { value: "4", label: "< 4 horas" }
+            ]}
+          />
+          <Select
+            placeholder="Sleccione un segmento"
+            onChange={(term: string) => helpers.setFilters({ cust_type: term })}
+            options={[
+              { value: "postpaid-A,N,V,G,L", label: "B2B FULL" },
+              { value: "postpaid-R", label: "B2C" },
+              { value: "postpaid-M", label: "B2B SOHO" },
+              { value: "postpaid-", label: "B2C" },
+              { value: "prepaid-", label: "Prepago" }
             ]}
           />
         </div>

@@ -12,7 +12,7 @@ import { getTopologias } from "./helpers/_requests";
 
 const ListWrapper = () => {
   const portasoutclosed: BasicTableState = useSelector((state: ReduxState) => state.portasoutclosed);
-  const { dataList, helpers } = useBasicTable("/porta-request-out/closed", portasoutclosed, actions);
+  const { dataList, helpers } = useBasicTable("/porta-request-out/closed", { ...portasoutclosed, filters: {} }, actions);
 
   const [topologias, setTopologias] = useState<Topologia[]>([])
 
@@ -56,6 +56,17 @@ const ListWrapper = () => {
           placeholder="Selecciona un tipo de servicio"
           onChange={(term: string) => helpers.setFilters({ poa_serv_type: term })}
           options={[{ value: "prepaid", label: "Prepago" }, { value: "postpaid", label: "Postpago" }]}
+        />
+        <Select
+          placeholder="Sleccione un segmento"
+          onChange={(term: string) => helpers.setFilters({ cust_type: term })}
+          options={[
+            { value: "postpaid-A,N,V,G,L", label: "B2B FULL" },
+            { value: "postpaid-R", label: "B2C" },
+            { value: "postpaid-M", label: "B2B SOHO" },
+            { value: "postpaid-", label: "B2C" },
+            { value: "prepaid-", label: "Prepago" }
+          ]}
         />
       </div>
     </BasicTable>
