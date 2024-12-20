@@ -6,9 +6,10 @@ type Props = {
   className?: string;
   iconType?: "duotone" | "solid" | "outline";
   iconName: string;
+  style: React.CSSProperties;
 };
 
-const KTIcon: React.FC<Props> = ({ className = "", iconType, iconName }) => {
+const KTIcon: React.FC<Props> = ({ className = "", iconType, iconName, style }) => {
   if (!iconType) {
     iconType = getLayout().main?.iconType;
   }
@@ -21,6 +22,7 @@ const KTIcon: React.FC<Props> = ({ className = "", iconType, iconName }) => {
         [...Array(icons[iconName])].map((e, i) => {
           return (
             <span
+              style={style}
               key={`${iconType}-${iconName}-${className}-path-${i + 1}`}
               className={`path${i + 1}`}
             >
