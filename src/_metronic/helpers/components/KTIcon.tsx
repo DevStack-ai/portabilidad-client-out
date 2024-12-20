@@ -6,7 +6,7 @@ type Props = {
   className?: string;
   iconType?: "duotone" | "solid" | "outline";
   iconName: string;
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
 };
 
 const KTIcon: React.FC<Props> = ({ className = "", iconType, iconName, style }) => {
