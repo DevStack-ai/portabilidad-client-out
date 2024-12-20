@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { BasicTableState, ReduxState, useAuth } from "../../providers";
 import * as actions from "../../redux/reducers/portasoutdue/actions";
 import TopologiaModal from "../../components/modal/TopologiaModal";
+import NewUrlModal from "../../components/modal/NewURL";
 import { updateUser, takeCase } from "../portas/helpers/_requests";
 import toast from "react-hot-toast";
 import { PortaRequestOut, Reason, Topologia } from "../../definitions";
@@ -20,6 +21,9 @@ const ListWrapper = () => {
 
   const { currentUser } = useAuth()
   const [modalShow, setModalShow] = useState(false);
+  const [modalUrl, setmodalUrl] = useState(false);
+
+
   const [topologias, setTopologias] = useState<Topologia[]>([])
   const [reasons, setReasons] = useState<Reason[]>([])
 
@@ -63,6 +67,16 @@ const ListWrapper = () => {
     setModalShow(true)
 
   }
+  
+    function generateToken(document: PortaRequestOut) {
+      console.log(document)
+      setDocument(document)
+      setmodalUrl(true)
+    }
+  
+    function updateUrl() {
+      setmodalUrl(false)
+    }
   async function take(porta_id: number) {
     try {
       await takeCase(porta_id)
@@ -91,9 +105,14 @@ const ListWrapper = () => {
         isLoading={helpers.isLoading}
         onSave={updateDocument}
       />}
+         {document?.id && <NewUrlModal
+              show={modalUrl}
+              document={document}
+              onSave={updateUrl}
+            />}
       <BasicTable
         {...helpers}
-        columnsList={getColumns({ setDocument: closeCae, takeCase: take, currentUser })}
+        columnsList={getColumns({ setDocument: closeCae, takeCase: take, currentUser, generateToken })}
         dataList={dataList}
       >
         <div className="d-flex">
