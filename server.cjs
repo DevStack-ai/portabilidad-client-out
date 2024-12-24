@@ -16,7 +16,7 @@ app.all('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-const port = 9091
+const port = process.env.PORT || 80;
 app.listen(port, () => {
   console.log(`Servidor iniciado en el puerto ${port}`);
 });
