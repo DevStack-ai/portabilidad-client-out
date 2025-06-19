@@ -5,13 +5,16 @@ import { ListWrapper as ListWrapperDue } from "./PortasListDue";
 import { ListWrapper as ListWrapperClosed } from "./PortasListClosed";
 import { DetailsDocumentWrapper } from "./PortasEdit";
 import { ListWrapper as MyAssigned } from "./PortasListAssigned";
+import { useAuth } from "../../providers";
 // import { UsersNewWrapper } from "./NewUser"
 
 const Wrapper = () => {
+
+  const { hasPermission } = useAuth();
   return (
     <Routes>
       <Route element={<Outlet />}>
-        <Route
+        {hasPermission("4", "read") && <Route
           path="/view"
           element={
             <>
@@ -21,8 +24,8 @@ const Wrapper = () => {
               <ListWrapper />
             </>
           }
-        />
-        <Route
+        />}
+        {hasPermission("2", "read") && <Route
           path="/due"
           element={
             <>
@@ -32,8 +35,8 @@ const Wrapper = () => {
               <ListWrapperDue />
             </>
           }
-        />
-        <Route
+        />}
+        {hasPermission("3", "read") && <Route
           path="/closed"
           element={
             <>
@@ -43,7 +46,7 @@ const Wrapper = () => {
               <ListWrapperClosed />
             </>
           }
-        />
+        />}
 
         <Route
           path="/details/:id"
@@ -56,7 +59,7 @@ const Wrapper = () => {
             </>
           }
         />
-          <Route
+        {hasPermission("1", "read") && <Route
           path="/assigned/"
           element={
             <>
@@ -66,7 +69,7 @@ const Wrapper = () => {
               <MyAssigned />
             </>
           }
-        />
+        />}
       </Route>
 
       <Route index element={<Navigate to="/portas-out/view" />} />

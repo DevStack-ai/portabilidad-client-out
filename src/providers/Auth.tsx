@@ -20,14 +20,16 @@ type AuthContextProps = {
   currentUser: UserModel | undefined;
   setCurrentUser: Dispatch<SetStateAction<UserModel | undefined>>;
   logout: () => void;
+  hasPermission: (code: string, action: "create" | "delete" | "read" | "update") => boolean;
 };
 
 const initAuthContextPropsState = {
   auth: authHelper.getAuth(),
-  saveAuth: () => {},
+  saveAuth: () => { },
   currentUser: undefined,
-  setCurrentUser: () => {},
-  logout: () => {},
+  setCurrentUser: () => { },
+  logout: () => { },
+  hasPermission: (code: string, action: "create" | "delete" | "read" | "update") => false,
 };
 
 const AuthContext = createContext<AuthContextProps>(initAuthContextPropsState);
@@ -53,9 +55,37 @@ const AuthProvider: FC<WithChildren> = ({ children }) => {
     setCurrentUser(undefined);
   };
 
+  const hasPermission = (code: string, action: "create" | "delete" | "read" | "update" = "read"): boolean => {
+    if (!currentUser) {
+      return false;
+    }
+
+    const transactions = currentUser.transactions || [];
+    const transaction = transactions.find((transaction) => transaction.code === code);
+
+    if (!transaction) {
+      return false;
+    }
+
+    switch (action) {
+      case "create":
+        return transaction.create;
+      case "delete":
+        return transaction.delete;
+      case "read":
+        return transaction.read; // Assuming read permission is always granted
+      case "update":
+        return transaction.update;
+      default:
+        return false;
+    }
+
+
+  }
+
   return (
     <AuthContext.Provider
-      value={{ auth, saveAuth, currentUser, setCurrentUser, logout }}
+      value={{ auth, saveAuth, currentUser, setCurrentUser, logout, hasPermission }}
     >
       {children}
     </AuthContext.Provider>

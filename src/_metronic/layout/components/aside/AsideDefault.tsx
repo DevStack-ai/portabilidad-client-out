@@ -17,7 +17,7 @@ import { useAuth } from "../../../../providers";
 const AsideDefault = () => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  const { currentUser } = useAuth();
+  const { currentUser, hasPermission } = useAuth();
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -31,7 +31,6 @@ const AsideDefault = () => {
     }, 50);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
-
 
 
   return (
@@ -52,18 +51,18 @@ const AsideDefault = () => {
           id="kt_app_sidebar_logo"
         >
           {/* <Link to="/dashboard"> */}
-            <div>
-              <img
-                src={toAbsoluteUrl("/media/logos/default.png")}
-                alt="logo"
-                className="h-50px h-lg-50px d-none d-sm-inline app-sidebar-logo-default theme-light-show"
-              />
-              <img
-                src={toAbsoluteUrl("/media/logos/default-dark.png")}
-                alt="logo"
-                className="h-25px h-lg-50px d-none d-sm-inline app-sidebar-logo-default theme-dark-show"
-              />
-            </div>
+          <div>
+            <img
+              src={toAbsoluteUrl("/media/logos/default.png")}
+              alt="logo"
+              className="h-50px h-lg-50px d-none d-sm-inline app-sidebar-logo-default theme-light-show"
+            />
+            <img
+              src={toAbsoluteUrl("/media/logos/default-dark.png")}
+              alt="logo"
+              className="h-25px h-lg-50px d-none d-sm-inline app-sidebar-logo-default theme-dark-show"
+            />
+          </div>
           {/* </Link> */}
         </div>
 
@@ -103,26 +102,26 @@ const AsideDefault = () => {
                 title="Tipologias"
                 icon="filter"
               /> */}
-              <AsideMenuItem
+              {hasPermission("4", "read") && <AsideMenuItem
                 to="/portas-out/view"
                 title="Solicitudes Pendientes"
                 icon="save-2"
-              />
-              <AsideMenuItem
+              />}
+              {hasPermission("2", "read") && <AsideMenuItem
                 to="/portas-out/due"
                 title="Solicitudes Vencidas"
                 icon="save-2"
-              />
-              <AsideMenuItem
+              />}
+              {hasPermission("3", "read") && <AsideMenuItem
                 to="/portas-out/closed"
                 title="Solicitudes Cerradas"
                 icon="save-2"
-              />
-               <AsideMenuItem
+              />}
+              {hasPermission("1", "read") && <AsideMenuItem
                 to="/portas-out/assigned"
                 title="Mis asignaciones"
                 icon="save-2"
-              />
+              />}
             </div>
           </div>
         </div>
@@ -153,7 +152,7 @@ const AsideDefault = () => {
                   `text-primary`,
                 )}
               >
-                {currentUser?.username?.[0]}
+                {currentUser?.name?.[0]}
               </div>
             </div>
             <div className="d-flex flex-column align-items-start justify-content-center ms-3">
@@ -162,7 +161,7 @@ const AsideDefault = () => {
                 href="#"
                 className="text-gray-800 fs-7 fw-bold text-hover-primary"
               >
-                {currentUser?.username}
+                {currentUser?.name}
               </a>
             </div>
           </div>
@@ -180,12 +179,12 @@ const AsideDefault = () => {
                       `text-primary`,
                     )}
                   >
-                    {currentUser?.username?.[0]}
+                    {currentUser?.name?.[0]}
                   </div>
                 </div>
                 <div className="d-flex flex-column">
                   <div className="fw-bold d-flex align-items-center fs-5">
-                    {currentUser?.username}
+                    {currentUser?.name}
                   </div>
                   <a
                     href="#"
@@ -197,7 +196,7 @@ const AsideDefault = () => {
               </div>
             </div>
             <div className="separator my-2"></div>
-     
+
 
             <div className="menu-item px-5">
               <Link to="/logout" className="menu-link px-5">
