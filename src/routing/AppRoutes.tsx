@@ -11,7 +11,7 @@ import { PrivateRoutes } from "./PrivateRoutes";
 import { ErrorsPage } from "../components/errors/ErrorsPage";
 import { useAuth } from "../providers";
 import { App } from "../App";
-import { AuthPage, Logout } from "../pages/Auth";
+import { AuthPage, Logout, Oauth } from "../pages/Auth";
 import { OutForm } from "../pages/out";
 
 const PUBLIC_URL = import.meta.env.VITE_PUBLIC_URL;
@@ -35,6 +35,7 @@ const AppRoutes: FC = () => {
             : (
               <>
                 <Route path="auth/*" element={<AuthPage />} />
+                <Route path="oauth" element={<Oauth />} />
                 <Route path="*" element={<Navigate to="/auth" />} />
               </>
             )}
